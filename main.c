@@ -1,19 +1,49 @@
-#include <stdio.h>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_image.h>
+#include <stdio.h>
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
-const int BALL_SIZE = 20;
+const int GRID_SIZE = 15;
+const int SQUARE_SIZE = SCREEN_WIDTH / GRID_SIZE;
+
+// Structure representing an object (e.g., cat, mouse, dog)
+struct GameObject {
+    int health;
+    int attack;
+    ALLEGRO_BITMAP* image; // Image for the object
+};
+
+// Function to draw a square on the grid
+void drawSquare(ALLEGRO_DISPLAY* display, int row, int col, ALLEGRO_COLOR color) {
+    al_draw_filled_rectangle(col * SQUARE_SIZE, row * SQUARE_SIZE,
+                             (col + 1) * SQUARE_SIZE, (row + 1) * SQUARE_SIZE, color);
+}
+
+// Function to draw a game object on a square
+void drawObject(ALLEGRO_DISPLAY* display, int row, int col, const struct GameObject* object) {
+    // Draw the image if available, otherwise draw a colored rectangle
+    if (object->image != NULL) {
+        al_draw_bitmap(object->image, col * SQUARE_SIZE, row * SQUARE_SIZE, 0);
+    } else {
+        ALLEGRO_COLOR color = al_map_rgb(255, 255 - object->health * 10, 255 - object->health * 10);
+        drawSquare(display, row, col, color);
+    }
+}
 
 int main() {
-    ALLEGRO_DISPLAY *display = NULL;
-    ALLEGRO_EVENT_QUEUE *event_queue = NULL;
-    ALLEGRO_TIMER *timer = NULL;
+    ALLEGRO_DISPLAY* display = NULL;
 
     // Initialize Allegro
     if (!al_init()) {
         fprintf(stderr, "Failed to initialize Allegro!\n");
+        return -1;
+    }
+
+    // Initialize Allegro image addon
+    if (!al_init_image_addon()) {
+        fprintf(stderr, "Failed to initialize Allegro image addon!\n");
         return -1;
     }
 
@@ -27,80 +57,51 @@ int main() {
     // Initialize Allegro primitives addon for basic shapes
     al_init_primitives_addon();
 
-    // Install the keyboard
-    al_install_keyboard();
+    // Create a 2D array of game objects
+    struct GameObject gameGrid[GRID_SIZE][GRID_SIZE];
 
-    // Create an event queue
-    event_queue = al_create_event_queue();
-    if (!event_queue) {
-        fprintf(stderr, "Failed to create event queue!\n");
-        al_destroy_display(display);
-        return -1;
+    // Load images for cat and dog
+    ALLEGRO_BITMAP* catImage = al_load_bitmap("cat.png");
+    ALLEGRO_BITMAP* dogImage = al_load_bitmap("dog.png");
+
+    // Initialize game objects (for demonstration purposes)
+    for (int row = 0; row < GRID_SIZE; ++row) {
+        for (int col = 0; col < GRID_SIZE; ++col) {
+            gameGrid[row][col].health = rand() % 10; // Random health value (0 to 9)
+            gameGrid[row][col].attack = rand() % 10; // Random attack value (0 to 9)
+
+            // Assign images based on some conditions (you may modify this logic)
+            if (gameGrid[row][col].health > 5) {
+                gameGrid[row][col].image = catImage; // Assign cat image
+            } else {
+                gameGrid[row][col].image = dogImage; // Assign dog image
+            }
+        }
     }
-
-    // Create a timer for animation
-    timer = al_create_timer(1.0 / 60.0);
-    if (!timer) {
-        fprintf(stderr, "Failed to create timer!\n");
-        al_destroy_display(display);
-        al_destroy_event_queue(event_queue);
-        return -1;
-    }
-
-    // Register event sources
-    al_register_event_source(event_queue, al_get_display_event_source(display));
-    al_register_event_source(event_queue, al_get_timer_event_source(timer));
-    al_register_event_source(event_queue, al_get_keyboard_event_source());
-
-    // Start the timer
-    al_start_timer(timer);
-
-    // Ball properties
-    float ball_x = SCREEN_WIDTH / 2.0;
-    float ball_y = SCREEN_HEIGHT / 2.0;
-    float ball_dx = 5.0;
-    float ball_dy = 3.0;
 
     // Main game loop
-    bool redraw = true;
-    ALLEGRO_EVENT event;
     while (1) {
-        al_wait_for_event(event_queue, &event);
+        al_clear_to_color(al_map_rgb(255, 255, 255)); // Clear the display
 
-        if (event.type == ALLEGRO_EVENT_TIMER) {
-            // Update ball position
-            ball_x += ball_dx;
-            ball_y += ball_dy;
-
-            // Bounce off the walls
-            if (ball_x - BALL_SIZE / 2 < 0 || ball_x + BALL_SIZE / 2 > SCREEN_WIDTH) {
-                ball_dx = -ball_dx;
+        // Draw the grid
+        for (int row = 0; row < GRID_SIZE; ++row) {
+            for (int col = 0; col < GRID_SIZE; ++col) {
+                drawSquare(display, row, col, al_map_rgb(200, 200, 200)); // Draw a grid square
+                drawObject(display, row, col, &gameGrid[row][col]); // Draw the object on the square
             }
-            if (ball_y - BALL_SIZE / 2 < 0 || ball_y + BALL_SIZE / 2 > SCREEN_HEIGHT) {
-                ball_dy = -ball_dy;
-            }
-
-            redraw = true;
-        } else if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
-            break;
         }
 
-        if (redraw && al_is_event_queue_empty(event_queue)) {
-            // Draw the ball
-            al_clear_to_color(al_map_rgb(255, 255, 255));
-            al_draw_filled_circle(ball_x, ball_y, BALL_SIZE / 2, al_map_rgb(255, 0, 0));
+        // Flip the display
+        al_flip_display();
 
-            // Flip the display
-            al_flip_display();
-
-            redraw = false;
-        }
+        // Wait for a short duration to control the frame rate (you may adjust this)
+        al_rest(0.1);
     }
 
     // Clean up
-    al_destroy_timer(timer);
     al_destroy_display(display);
-    al_destroy_event_queue(event_queue);
+    al_destroy_bitmap(catImage);
+    al_destroy_bitmap(dogImage);
 
     return 0;
 }
