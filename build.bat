@@ -1,1 +1,1 @@
-gcc main.c -o main.exe -lallegro -lallegro_font -lallegro -lallegro_primitives -lallegro_image
+gcc main.c -o main.exe -lallegro -lallegro_font -lallegro -lallegro_primitives -lallegro_image -lallegro_dialog
