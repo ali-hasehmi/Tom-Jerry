@@ -26,6 +26,7 @@ typedef struct square
     int r, g, b;
     void *character;
     bool is_trap;
+    bool walls[4];// 0 : left, 1 : up, 2 : right ,3 : down
 } square_t;
 
 square_t *create_square(int x1, int y1, int x2, int y2);
