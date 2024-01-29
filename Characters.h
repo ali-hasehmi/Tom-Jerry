@@ -26,13 +26,13 @@ typedef struct mouse{
 typedef struct cat {
     int defense, attack, mouses;
     int is_limited;
-    Mouse mouse[18];
+    mouse_t mouse[18];
     int x,y;
     ALLEGRO_BITMAP *image;
 }cat_t;
 
 typedef struct player {
-    Cat type;
+    cat_t type;
     int point;
     int x,y;
     ALLEGRO_BITMAP *image;
