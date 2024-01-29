@@ -13,14 +13,14 @@ typedef enum mice { Four= 4 ,Three = 3, Two = 2, One = 1 , Zero = 0}mice;
 typedef struct square {
     state type;
 
-}square;
+}square_t;
 
 typedef struct mouse{
     mice type;
     int speed;
     int x,y;
     ALLEGRO_BITMAP *image;
-}Mouse;
+}mouse_t;
 
 
 typedef struct cat {
@@ -29,14 +29,14 @@ typedef struct cat {
     Mouse mouse[18];
     int x,y;
     ALLEGRO_BITMAP *image;
-}Cat;
+}cat_t;
 
 typedef struct player {
     Cat type;
     int point;
     int x,y;
     ALLEGRO_BITMAP *image;
-}Player;
+}player_t;
 
 typedef struct dog {
     dogs type;
@@ -44,13 +44,13 @@ typedef struct dog {
     bool is_alive;
     int x,y;
     ALLEGRO_BITMAP *image;
-}Dog;
+}dog_t;
 
 
 typedef struct fish{
     int energy;
     int x,y;
     ALLEGRO_BITMAP *image;
-}Fish;
+}fish_t;
 
 #endif //TOM_JERRY_CHARACTERS_H
