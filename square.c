@@ -12,6 +12,9 @@ square_t *create_square(int x1, int y1, int x2, int y2)
     s->r = 160;
     s->g = 156;
     s->b = 101;
+    s->character = NULL;
+    s->is_trap = false;
+    s->type = NOTHING;
     return s;
 }
 
@@ -37,20 +40,20 @@ void update_square(square_t *s, state_t _new_type, void *_new_character)
         s->b = 101;
         break;
 
-    case TRAP:
-        if (((trap_t *)s->character)->is_reveal)
-        {
-            s->r = 3;
-            s->g = 0;
-            s->b = 8;
-        }
-        else
-        {
-            s->r = 160;
-            s->g = 156;
-            s->b = 101;
-        }
-        break;
+    // case TRAP:
+    //     if (((trap_t *)s->character)->is_reveal)
+    //     {
+    //         s->r = 3;
+    //         s->g = 0;
+    //         s->b = 8;
+    //     }
+    //     else
+    //     {
+    //         s->r = 160;
+    //         s->g = 156;
+    //         s->b = 101;
+    //     }
+    //     break;
 
     case MOUSE:
         s->r = 240;
@@ -86,4 +89,13 @@ void update_square(square_t *s, state_t _new_type, void *_new_character)
         fprintf(stderr, "update_square():Not valid state");
         break;
     }
+}
+
+bool set_square_as_trap(square_t *s)
+{
+    if(s->is_trap == true){
+        return false;
+    }
+    s->is_trap = true;
+    return true;
 }

@@ -46,14 +46,18 @@ void draw_grid(grid_t *g)
 void draw_image_at(ALLEGRO_BITMAP *image, grid_t *g, int _x, int _y)
 {
     float scale_x, scale_y;
+    printf("draw_image1.1\n");
     int image_width = al_get_bitmap_width(image);
     int image_height = al_get_bitmap_height(image);
+    printf("draw_image1.2\n");
     scale_x = (float)SQUARE_WIDTH / image_width;
     // int image_height =al_get_bitmap_height(image);
     scale_y = (float)SQUARE_HEIGHT / image_height;
+    printf("draw_image2\n");
     al_draw_scaled_bitmap(image, 0, 0, image_width, image_height,
                           g->squares[_y][_x]->x1, g->squares[_y][_x]->y1,
                           image_width * scale_x, image_width * scale_y, 0);
+                          printf("draw_image3\n");
 }
 
 // int main()

@@ -11,7 +11,6 @@
 typedef enum state
 {
     NOTHING,
-    TRAP,
     MOUSE,
     CAT,
     DOG,
@@ -26,7 +25,7 @@ typedef struct square
     int x2, y2;
     int r, g, b;
     void *character;
-
+    bool is_trap;
 } square_t;
 
 square_t *create_square(int x1, int y1, int x2, int y2);
@@ -36,5 +35,7 @@ void destroy_square(square_t *s);
 void draw_square(square_t *s);
 
 void update_square(square_t *s, state_t _new_type, void *_new_character);
+
+bool set_square_as_trap(square_t *s);
 
 #endif // TOM_JERRY_SQUARE_H

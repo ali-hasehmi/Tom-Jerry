@@ -5,12 +5,17 @@
 
 #include <stdbool.h>
 
-typedef struct trap {
+#include "grid.h"
+
+typedef struct trap
+{
     bool is_reveal;
     int x, y;
     ALLEGRO_BITMAP *image;
-}trap_t;
+} trap_t;
 
-trap_t * create_trap();
-
-#endif //TOM_JERRY_TRAP_H
+void init_trap(grid_t *g);
+trap_t *create_trap();
+void update_trap(trap_t *t,bool _is_reveal);
+void destroy_trap(trap_t *t);
+#endif // TOM_JERRY_TRAP_H

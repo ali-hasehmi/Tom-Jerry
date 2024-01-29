@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "dog.h"
 #include "fish.h"
+#include "trap.h"
 
 int main()
 {
@@ -19,12 +20,15 @@ int main()
     grid_t *g = create_grid(15, 15, 80, 60);
     init_dog(g);
     init_fish(g);
+    init_trap(g);
+
     dog_t *b = create_dog(BULLDOG);
     dog_t *p = create_dog(PITBULL);
     dog_t *s = create_dog(SHEPHERD);
     dog_t *br = create_dog(BULLDOGJR);
     fish_t *f = create_fish();
     fish_t *f2 = create_fish();
+    trap_t *trap = create_trap();
     al_start_timer(timer);
     printf("here\n");
     int i = 0, j = 0;
@@ -40,14 +44,24 @@ int main()
         case ALLEGRO_EVENT_TIMER:
             printf("this is\n");
             al_clear_to_color(al_map_rgb(255, 255, 255));
-            //update_square(g->squares[4][4],TRAP,NULL);
+           // update_square(g->squares[4][4],TRAP,NULL);
+            printf("1\n");
             update_dog(b,++i,++j);
+            printf("2\n");
             update_dog(p,(i+2)/3,(j+1)/2);
+            printf("3\n");
             update_dog(s,(i+1)/4,(j+1)/9);
+            printf("4\n");
             update_dog(br,(i+6)/8,(j+1)/5);
+            printf("5\n");
             update_fish(f,true);
+            printf("6\n");
             update_fish(f2,true);
+             printf("7\n");
+            update_trap(trap,rand() % 3);
+            printf("8\n");
             draw_grid(g);
+            printf("9\n");
             al_flip_display();
             break;
         default:
