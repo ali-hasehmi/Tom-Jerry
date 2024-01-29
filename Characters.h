@@ -6,51 +6,77 @@
 #include <allegro5/allegro.h>
 
 #include <stdbool.h>
-typedef enum state { nothing, trap, mouse, player, dog, fish, bonus}state;
-typedef enum dogs {Bulldog, Pitbull, Shepherd, Bulldog_jr}dogs;
-typedef enum mice { Four= 4 ,Three = 3, Two = 2, One = 1 , Zero = 0}mice;
+typedef enum state
+{
+    nothing,
+    trap,
+    mouse,
+    player,
+    dog,
+    fish,
+    bonus
+} state;
+typedef enum dogs
+{
+    Bulldog,
+    Pitbull,
+    Shepherd,
+    Bulldog_jr
+} dogs;
+typedef enum mice
+{
+    Four = 4,
+    Three = 3,
+    Two = 2,
+    One = 1,
+    Zero = 0
+} mice;
 
-typedef struct square {
+typedef struct square
+{
     state type;
 
-}square_t;
+} square_t;
 
-typedef struct mouse{
+typedef struct mouse
+{
     mice type;
     int speed;
-    int x,y;
+    int x, y;
     ALLEGRO_BITMAP *image;
-}mouse_t;
+} mouse_t;
 
-
-typedef struct cat {
+typedef struct cat
+{
     int defense, attack, mouses;
     int is_limited;
     mouse_t mouse[18];
-    int x,y;
+    int x, y;
     ALLEGRO_BITMAP *image;
-}cat_t;
+} cat_t;
 
-typedef struct player {
+typedef struct player
+{
     cat_t type;
     int point;
-    int x,y;
+    int x, y;
     ALLEGRO_BITMAP *image;
-}player_t;
+} player_t;
 
-typedef struct dog {
+typedef struct dog
+{
     dogs type;
     int attack, defense, speed;
     bool is_alive;
-    int x,y;
+    int x, y;
     ALLEGRO_BITMAP *image;
-}dog_t;
+} dog_t;
 
-
-typedef struct fish{
+typedef struct fish
+{
     int energy;
-    int x,y;
+    int x, y;
     ALLEGRO_BITMAP *image;
-}fish_t;
+} fish_t;
 
-#endif //TOM_JERRY_CHARACTERS_H
+#endif // TOM_JERRY_CHARACTERS_H
