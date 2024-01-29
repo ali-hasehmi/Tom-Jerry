@@ -5,6 +5,8 @@
 
 #include <stdbool.h>
 
+#include "grid.h"
+
 typedef struct fish
 {
     int energy;
@@ -13,6 +15,12 @@ typedef struct fish
     ALLEGRO_BITMAP *image;
 } fish_t;
 
+void init_fish(grid_t *g);
+
 fish_t* create_fish();
+
+void update_fish(fish_t *f,bool _is_alive);
+
+void destroy_fish(fish_t *f);
 
 #endif //TOM_JERRY_FISH_H

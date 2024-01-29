@@ -1,6 +1,7 @@
 #include "grid.h"
 #include <stdio.h>
 #include "dog.h"
+#include "fish.h"
 
 int main()
 {
@@ -17,7 +18,10 @@ int main()
     al_register_event_source(queue, al_get_display_event_source(display));
     grid_t *g = create_grid(15, 15, 80, 60);
     init_dog(g);
-    dog_t *d = create_dog(4,2,3);
+    init_fish(g);
+    dog_t *d = create_dog(BULLDOG);
+    fish_t *f = create_fish();
+    fish_t *f2 = create_fish();
     al_start_timer(timer);
     printf("here\n");
     int i = 0, j = 0;
@@ -35,6 +39,8 @@ int main()
             al_clear_to_color(al_map_rgb(255, 255, 255));
             //update_square(g->squares[4][4],TRAP,NULL);
             update_dog(d,++i,++j);
+            update_fish(f,true);
+            update_fish(f2,true);
             draw_grid(g);
             al_flip_display();
             break;
