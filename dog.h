@@ -7,7 +7,13 @@
 #include <stdbool.h>
 #include "grid.h"
 
-typedef enum dogtype { BULLDOG, PITBULL, SHEPHERD , BULLDOGJR  }dogtype_t;
+typedef enum dogtype
+{
+    BULLDOG,
+    PITBULL,
+    SHEPHERD,
+    BULLDOGJR
+} dogtype_t;
 
 typedef struct dog
 {
@@ -24,6 +30,5 @@ dog_t *create_dog(dogtype_t type);
 void update_dog(dog_t *dog, int _x, int _y);
 
 int destroy_dog(dog_t *dog);
-
 
 #endif // TOM_JERRY_DOG_H

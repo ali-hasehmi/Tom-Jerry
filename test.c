@@ -19,7 +19,10 @@ int main()
     grid_t *g = create_grid(15, 15, 80, 60);
     init_dog(g);
     init_fish(g);
-    dog_t *d = create_dog(BULLDOG);
+    dog_t *b = create_dog(BULLDOG);
+    dog_t *p = create_dog(PITBULL);
+    dog_t *s = create_dog(SHEPHERD);
+    dog_t *br = create_dog(BULLDOGJR);
     fish_t *f = create_fish();
     fish_t *f2 = create_fish();
     al_start_timer(timer);
@@ -38,7 +41,10 @@ int main()
             printf("this is\n");
             al_clear_to_color(al_map_rgb(255, 255, 255));
             //update_square(g->squares[4][4],TRAP,NULL);
-            update_dog(d,++i,++j);
+            update_dog(b,++i,++j);
+            update_dog(p,(i+2)/3,(j+1)/2);
+            update_dog(s,(i+1)/4,(j+1)/9);
+            update_dog(br,(i+6)/8,(j+1)/5);
             update_fish(f,true);
             update_fish(f2,true);
             draw_grid(g);
