@@ -3,6 +3,7 @@
 #include "Characters.h"
 #include <time.h>
 #include <stdlib.h>
+void miceAdder(cat_t* cat_one,cat_t* cat_two);
 int combatCats(cat_t *cat_one, cat_t *cat_two);
 int combatDogs(cat_t *cat, dog_t *dog);
 int dice();
