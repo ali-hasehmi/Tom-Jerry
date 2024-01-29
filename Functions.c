@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <math.h>
 
-int combatCats(Cat *cat_one, Cat *cat_two)
+int combatCats(cat_t *cat_one,cat_t *cat_two)
 {
     if ((cat_two->attack * cat_two->defense) > (cat_one->defense * cat_one->attack))
     {
@@ -30,7 +30,7 @@ int combatCats(Cat *cat_one, Cat *cat_two)
     }
 }
 
-int combatDogs(Cat *cat, Dog *dog)
+int combatDogs(cat_t *cat, dog_t *dog)
 {
     if ((cat->attack * cat->defense) > (dog->defense * dog->attack))
     {
@@ -59,17 +59,17 @@ int dice()
     return (rand() % 6) + 1;
 }
 
-void stayOnFish(Cat *cat, Fish *fish)
+void stayOnFish(cat_t *cat, fish_t *fish)
 {
     cat->defense += fish->energy;
 }
 
-void stayOnBonus(Cat *cat)
+void stayOnBonus(cat_t *cat)
 {
     cat->attack++;
 }
 
-void stayOnTrap(Cat *cat)
+void stayOnTrap(cat_t *cat)
 {
     for (int i = 0; i < cat->mouses; i++)
     {
@@ -77,7 +77,7 @@ void stayOnTrap(Cat *cat)
         {
             if ((cat->mouse[i].type <= cat->mouse[j].type) && cat->mouse[i].type < 4 && cat->mouse[j].type < 4)
             {
-                Mouse tmp = cat->mouse[j];
+                mouse_t tmp = cat->mouse[j];
                 cat->mouse[j] = cat->mouse[i];
                 cat->mouse[i] = tmp;
             }
@@ -85,7 +85,7 @@ void stayOnTrap(Cat *cat)
     }
     if (cat->mouses)
     {
-        cat->mouse[0].type = Four;
+
         cat->mouse[0].speed = 0;
         cat->mouses--;
     }
