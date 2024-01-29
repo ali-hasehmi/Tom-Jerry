@@ -22,3 +22,56 @@ void draw_square(square_t *s)
 {
     al_draw_rectangle(s->x1, s->y1, s->x2, s->y2, al_map_rgb(s->r, s->g, s->b), 4);
 }
+
+void update_square(square_t *s, state_t _new_type, void *_new_character)
+{
+    s->type = _new_type;
+    s->character = _new_character;
+    switch (s->type)
+    {
+    case NOTHING:
+        s->r = 160;
+        s->g = 156;
+        s->b = 101;
+        break;
+
+    case TRAP:
+        s->r = 3;
+        s->g = 0;
+        s->b = 8;
+        break;
+
+    case MOUSE:
+        s->r = 240;
+        s->g = 25;
+        s->b = 20;
+        break;
+
+    case CAT:
+        s->r = 18;
+        s->g = 177;
+        s->b = 233;
+        break;
+
+    case DOG:
+        s->r = 111;
+        s->g = 47;
+        s->b = 166;
+        break;
+
+    case FISH:
+        s->r = 45;
+        s->g = 97;
+        s->b = 41;
+        break;
+    case BONUS:
+        s->r = 244;
+        s->g = 151;
+        s->b = 20;
+        break;
+
+    default:
+        fprintf(stderr, "update_square():Not valid state");
+        break;
+    }
+}
