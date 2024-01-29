@@ -9,7 +9,7 @@ void init_dog(grid_t *g)
     g_grid = g;
     dog_image = al_load_bitmap("dog02.png");
     if(dog_image == NULL){
-        fprintf(stderr, "dog image Could not be loaded\n");
+        fprintf(stderr, "[!] init_dog():dog image Could not be loaded\n");
     }
 }
 
