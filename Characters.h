@@ -47,19 +47,23 @@ typedef struct square
 
 typedef struct mouse
 {
+
     mice type;
     int speed;
     int x, y;
     ALLEGRO_BITMAP *image;
+
 } mouse_t;
 
 typedef struct cat
 {
+
     int defense, attack, mouses;
     int is_limited;
     mouse_t mouse[18];
     int x, y;
     ALLEGRO_BITMAP *image;
+    
 } cat_t;
 
 typedef struct player
