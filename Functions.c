@@ -5,7 +5,7 @@
 void miceAdder(cat_t* cat_one,cat_t* cat_two) {
     if(cat_two == NULL) {
         for(int i = 0 ; i < 18 ; i++) {
-           cat_one->mouse[i] = *create_mouse(DEAD);
+           cat_one->mouse[i] = *(create_mouse(DEAD));
         }
         cat_one->mouses = 0;
     }
@@ -79,16 +79,6 @@ int combatDogs(cat_t *cat, dog_t *dog)
 int dice()
 {
     return (rand() % 6) + 1;
-}
-
-void stayOnFish(cat_t *cat, fish_t *fish)
-{
-    cat->defense += fish->energy;
-}
-
-void stayOnBonus(cat_t *cat)
-{
-    cat->attack++;
 }
 
 void stayOnTrap(cat_t *cat)

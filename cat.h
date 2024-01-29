@@ -5,6 +5,9 @@
 
 #include <stdbool.h>
 #include "mouse.h"
+#include "Characters.h"
+
+typedef enum status { ONFISH , ONBONUS }status_t;
 
 typedef struct cat
 {
@@ -18,8 +21,8 @@ typedef struct cat
     ALLEGRO_BITMAP *image;
 } cat_t;
 
-cat_t* create_cat(int attack,int defense,int mouses);
-void update_cat();
+cat_t* create_cat();
+void update_cat(cat_t* cat,state_t state,fish_t* fish);
 int destroy_cat();
 
 #endif //TOM_JERRY_CAT_H
