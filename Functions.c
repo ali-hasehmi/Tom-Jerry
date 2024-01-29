@@ -7,9 +7,10 @@ void miceAdder(cat_t* cat_one,cat_t* cat_two) {
         for(int i = 0 ; i < 18 ; i++) {
            cat_one->mouse[i] = *create_mouse(DEAD);
         }
+        cat_one->mouses = 0;
     }
     else {
-        mice_t new_mouses[18];
+        mouse_t new_mouses[18];
         int itr = 0;
         for(int i = 0 ; i < 18 ; i++) {
             if( cat_one->mouse[i].type != DEAD ) {
@@ -43,7 +44,7 @@ int combatCats(cat_t *cat_one,cat_t *cat_two)
         cat_one->defense -= (cat_two->attack * cat_two->defense / cat_one->attack);
         cat_two->attack = 1;
         cat_two->defense = 0;
-
+        miceAdder(cat_one,cat_two);
         cat_two->is_limited = 2;
         return 1;
     }
@@ -58,16 +59,14 @@ int combatDogs(cat_t *cat, dog_t *dog)
     if ((cat->attack * cat->defense) > (dog->defense * dog->attack))
     {
         cat->defense -= (dog->attack * dog->defense / cat->attack);
-        dog->attack = 1;
-        dog->defense = 0;
-        dog->is_alive = false;
+        destroy_dog(dog);
         return 1;
     }
     else if ((cat->attack * cat->defense) < (dog->defense * dog->attack))
     {
         cat->attack = 1;
         cat->defense = 0;
-        cat->mouses = 0;
+        miceAdder(cat,NULL);
         cat->is_limited = 2;
         return 2;
     }

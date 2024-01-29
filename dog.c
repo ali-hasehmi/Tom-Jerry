@@ -20,13 +20,34 @@ void update_dog(dog_t *dog, int _x, int _y)
     draw_image_at(dog->image, g_grid, dog->x, dog->y);
 }
 
-dog_t *create_dog(int _attack, int _defense, int _speed)
+dog_t *create_dog(dogtype_t type)
 {
     //load_dog_image();
     dog_t *dog = (dog_t *)malloc(sizeof(dog_t));
-    dog->attack = _attack;
-    dog->defense = _defense;
-    dog->speed = _speed;
+    switch (type) {
+        case PITBULL:
+            dog->attack = 5;
+            dog->speed = 5;
+            dog->defense = 30;
+            break;
+        case BULLDOG:
+            dog->attack = 2;
+            dog->speed = 2;
+            dog->defense = 15;
+            break;
+        case SHEPHERD:
+            dog->attack = 2;
+            dog->speed = 3;
+            dog->defense = 20;
+            break;
+        case BULLDOGJR:
+            dog->attack = 1;
+            dog->speed = 1;
+            dog->defense = 5;
+            break;
+        default:
+            break;
+    }
     dog->is_alive = true;
     dog->x = rand() % 15;
     dog->y = rand() % 15;
