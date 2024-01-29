@@ -40,7 +40,6 @@ int main() {
         fprintf(stderr, "Failed to initialize Allegro!\n");
         return -1;
     }
-
     // Initialize Allegro image addon
     if (!al_init_image_addon()) {
         fprintf(stderr, "Failed to initialize Allegro image addon!\n");
