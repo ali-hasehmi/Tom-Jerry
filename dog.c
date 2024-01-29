@@ -18,6 +18,7 @@ void update_dog(dog_t *dog, int _x, int _y)
     dog->x = _x;
     dog->y = _y;
     draw_image_at(dog->image, g_grid, dog->x, dog->y);
+    
 }
 
 dog_t *create_dog(dogtype_t type)

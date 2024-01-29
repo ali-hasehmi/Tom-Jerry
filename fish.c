@@ -21,6 +21,7 @@ fish_t *create_fish()
     fish->x = rand() % 15;
     fish->y = rand() % 15;
     draw_image_at(fish_image, f_grid, fish->x, fish->y);
+    update_square(f_grid->squares[fish->y][fish->x], FISH, fish);
     return fish;
 }
 
