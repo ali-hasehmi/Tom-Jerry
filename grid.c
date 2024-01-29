@@ -11,8 +11,8 @@ grid_t *create_grid(const int _grid_w, const int _grid_h, const int _square_widt
         g->squares[i] = (square_t**)malloc(_grid_w *sizeof(square_t*));
         for (size_t j = 0; j < _grid_w; ++j)
         {
-            g->squares[i][j] = create_square(j * _square_width_size, i * _square_height_size,
-                                             (j + 1) * _square_width_size, (i + 1) * _square_height_size);
+            g->squares[i][j] = create_square(j * _square_width_size , i * _square_height_size,
+                                             (j + 1) * _square_width_size + 1, (i + 1) * _square_height_size +1);
         }
     }
     return g;

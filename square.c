@@ -1,5 +1,7 @@
 #include "square.h"
 
+#include "trap.h"
+
 square_t *create_square(int x1, int y1, int x2, int y2)
 {
     square_t *s = (square_t *)malloc(sizeof(square_t));
@@ -20,7 +22,7 @@ void destroy_square(square_t *s)
 
 void draw_square(square_t *s)
 {
-    al_draw_rectangle(s->x1, s->y1, s->x2, s->y2, al_map_rgb(s->r, s->g, s->b), 4);
+    al_draw_rectangle(s->x1, s->y1, s->x2, s->y2, al_map_rgb(s->r, s->g, s->b), 2);
 }
 
 void update_square(square_t *s, state_t _new_type, void *_new_character)
@@ -36,9 +38,18 @@ void update_square(square_t *s, state_t _new_type, void *_new_character)
         break;
 
     case TRAP:
-        s->r = 3;
-        s->g = 0;
-        s->b = 8;
+        if (((trap_t *)s->character)->is_reveal)
+        {
+            s->r = 3;
+            s->g = 0;
+            s->b = 8;
+        }
+        else
+        {
+            s->r = 160;
+            s->g = 156;
+            s->b = 101;
+        }
         break;
 
     case MOUSE:
@@ -64,6 +75,7 @@ void update_square(square_t *s, state_t _new_type, void *_new_character)
         s->g = 97;
         s->b = 41;
         break;
+
     case BONUS:
         s->r = 244;
         s->g = 151;

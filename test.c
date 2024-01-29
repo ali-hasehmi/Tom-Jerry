@@ -30,6 +30,7 @@ int main()
         case ALLEGRO_EVENT_TIMER:
             printf("this is\n");
             al_clear_to_color(al_map_rgb(255, 255, 255));
+            
             update_square(g->squares[4][4],TRAP,NULL);
             draw_grid(g);
             al_flip_display();

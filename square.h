@@ -16,7 +16,7 @@ typedef enum state
     CAT,
     DOG,
     FISH,
-    BONUS
+    BONUS,
 } state_t;
 
 typedef struct square
