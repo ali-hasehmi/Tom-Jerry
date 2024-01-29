@@ -5,14 +5,43 @@ grid_t *create_grid(const int _grid_w, const int _grid_h, const int _square_widt
     grid_t *g = (grid_t *)malloc(sizeof(grid_t));
     g->width = _grid_w;
     g->height = _grid_h;
-    g->squares = (square_t ***)malloc(_grid_h*sizeof(square_t **));
+    g->squares = (square_t ***)malloc(_grid_h * sizeof(square_t **));
     for (size_t i = 0; i < _grid_h; ++i)
     {
-        g->squares[i] = (square_t**)malloc(_grid_w *sizeof(square_t*));
+        g->squares[i] = (square_t **)malloc(_grid_w * sizeof(square_t *));
         for (size_t j = 0; j < _grid_w; ++j)
         {
-            g->squares[i][j] = create_square(j * _square_width_size , i * _square_height_size,
-                                             (j + 1) * _square_width_size + 1, (i + 1) * _square_height_size +1);
+            g->squares[i][j] = create_square(j * _square_width_size, i * _square_height_size,
+                                             (j + 1) * _square_width_size + 1, (i + 1) * _square_height_size + 1);
+        }
+    }
+    for (size_t i = 1; i < g->height-1; ++i)
+    {
+        for (size_t j = 1; j < g->width -1; ++j)
+        {
+            bool is_wall = rand() % 5;
+            if (!is_wall)
+            {
+                int direction = rand() % 4;
+                g->squares[i][j]->walls[direction] = 1;
+                switch (direction)
+                {
+                case 0:
+                    g->squares[i][j-1]->walls[2] =1;
+                    break;
+                case 1:
+                    g->squares[i-1][j]->walls[3] =1;
+                    break;
+                case 2:
+                    g->squares[i][j + 1]->walls[0] =1;
+                    break;
+                case 3:
+                     g->squares[i+1][j]->walls[1] =1;
+                    break;
+                default:
+                    break;
+                }
+            }
         }
     }
     return g;
@@ -57,7 +86,7 @@ void draw_image_at(ALLEGRO_BITMAP *image, grid_t *g, int _x, int _y)
     al_draw_scaled_bitmap(image, 0, 0, image_width, image_height,
                           g->squares[_y][_x]->x1, g->squares[_y][_x]->y1,
                           image_width * scale_x, image_width * scale_y, 0);
-                          printf("draw_image3\n");
+    printf("draw_image3\n");
 }
 
 // int main()

@@ -11,7 +11,7 @@ int main()
     al_init_primitives_addon();
     al_init_image_addon();
     ALLEGRO_EVENT_QUEUE *queue = al_create_event_queue();
-    ALLEGRO_TIMER *timer = al_create_timer(1.0 );
+    ALLEGRO_TIMER *timer = al_create_timer(1.0);
 
     ALLEGRO_DISPLAY *display = al_create_display(1200, 900);
 
@@ -43,22 +43,26 @@ int main()
             break;
         case ALLEGRO_EVENT_TIMER:
             printf("this is\n");
-            al_clear_to_color(al_map_rgb(255, 255, 255));
-           // update_square(g->squares[4][4],TRAP,NULL);
+            al_clear_to_color(al_map_rgb(190, 156, 84));
+            al_draw_line(0,1,1200,1,al_map_rgb(147,154,70),25);
+            al_draw_line(0,1,0,900,al_map_rgb(147,154,70),25);
+            al_draw_line(0,900,1200,900,al_map_rgb(147,154,70),25);
+            al_draw_line(1200,1,1200,900,al_map_rgb(147,154,70),25);
+            // update_square(g->squares[4][4],TRAP,NULL);
             printf("1\n");
-            update_dog(b,++i,++j);
+            update_dog(b, ++i, ++j);
             printf("2\n");
-            update_dog(p,(i+2)/3,(j+1)/2);
+            update_dog(p, (i + 2) / 3, (j + 1) / 2);
             printf("3\n");
-            update_dog(s,(i+1)/4,(j+1)/9);
+            update_dog(s, (i + 1) / 4, (j + 1) / 9);
             printf("4\n");
-            update_dog(br,(i+6)/8,(j+1)/5);
+            update_dog(br, (i + 6) / 8, (j + 1) / 5);
             printf("5\n");
-            update_fish(f,true);
+            update_fish(f, true);
             printf("6\n");
-            update_fish(f2,true);
-             printf("7\n");
-            update_trap(trap,rand() % 3);
+            update_fish(f2, true);
+            printf("7\n");
+            update_trap(trap, rand() % 3);
             printf("8\n");
             draw_grid(g);
             printf("9\n");

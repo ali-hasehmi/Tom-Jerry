@@ -5,7 +5,13 @@
 
 #include <stdbool.h>
 
-typedef enum mice { ONE , TWO , THREE , DEAD }mice_t;
+typedef enum mice
+{
+    ONE,
+    TWO,
+    THREE,
+    DEAD
+} mice_t;
 
 typedef struct mouse
 {
@@ -16,8 +22,8 @@ typedef struct mouse
     ALLEGRO_BITMAP *image;
 } mouse_t;
 
-mouse_t* create_mouse(mice_t type);
-void update(mouse_t* mouse,int _x,int _y);
-int destroy_mouse(mouse_t* mouse);
+mouse_t *create_mouse(mice_t type);
+void update_mouse(mouse_t *mouse, int _x, int _y);
+int destroy_mouse(mouse_t *mouse);
 
-#endif //TOM_JERRY_MOUSE_H
+#endif // TOM_JERRY_MOUSE_H
