@@ -1,23 +1,26 @@
 #include "grid.h"
 #include <stdio.h>
+#include "dog.h"
 
 int main()
 {
 
     al_init();
     al_init_primitives_addon();
-
+    al_init_image_addon();
     ALLEGRO_EVENT_QUEUE *queue = al_create_event_queue();
-    ALLEGRO_TIMER *timer = al_create_timer(1.0 / 30.0);
+    ALLEGRO_TIMER *timer = al_create_timer(1.0 );
 
     ALLEGRO_DISPLAY *display = al_create_display(1200, 900);
 
     al_register_event_source(queue, al_get_timer_event_source(timer));
     al_register_event_source(queue, al_get_display_event_source(display));
     grid_t *g = create_grid(15, 15, 80, 60);
-
+    init_dog(g);
+    dog_t *d = create_dog(4,2,3);
     al_start_timer(timer);
     printf("here\n");
+    int i = 0, j = 0;
     while (1)
     {
         ALLEGRO_EVENT e;
@@ -30,8 +33,8 @@ int main()
         case ALLEGRO_EVENT_TIMER:
             printf("this is\n");
             al_clear_to_color(al_map_rgb(255, 255, 255));
-            
-            update_square(g->squares[4][4],TRAP,NULL);
+            //update_square(g->squares[4][4],TRAP,NULL);
+            update_dog(d,++i,++j);
             draw_grid(g);
             al_flip_display();
             break;

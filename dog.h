@@ -5,6 +5,7 @@
 #include <allegro5/allegro.h>
 
 #include <stdbool.h>
+#include "grid.h"
 
 typedef struct dog
 {
@@ -14,8 +15,13 @@ typedef struct dog
     ALLEGRO_BITMAP *image;
 } dog_t;
 
-dog_t* create_dog(int attack,int defense,int speed);
+void init_dog(grid_t *g);
+
+dog_t *create_dog(int attack, int defense, int speed);
+
+void update_dog(dog_t *dog, int _x, int _y);
+
+int destroy_dog(dog_t *dog);
 
 
-
-#endif //TOM_JERRY_DOG_H
+#endif // TOM_JERRY_DOG_H
