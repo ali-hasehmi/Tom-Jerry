@@ -89,7 +89,7 @@ void draw_image_at(ALLEGRO_BITMAP *image, grid_t *g, int _x, int _y)
     scale_y = (float)SQUARE_HEIGHT / image_height;
     al_draw_scaled_bitmap(image, 0, 0, image_width, image_height,
                           g->squares[_y][_x]->x1, g->squares[_y][_x]->y1,
-                          image_width * scale_x, image_width * scale_y,0);
+                          image_width * scale_x, image_width * scale_y, 0);
 }
 int main()
 {
@@ -100,6 +100,11 @@ int main()
 
     ALLEGRO_TIMER *timer = al_create_timer(1.0 / 30.0);
     ALLEGRO_EVENT_QUEUE *queue = al_create_event_queue();
+
+    al_set_new_display_option(ALLEGRO_SAMPLE_BUFFERS, 1, ALLEGRO_SUGGEST);
+    al_set_new_display_option(ALLEGRO_SAMPLES, 8, ALLEGRO_SUGGEST);
+    al_set_new_bitmap_flags(ALLEGRO_MIN_LINEAR | ALLEGRO_MAG_LINEAR);
+
     ALLEGRO_DISPLAY *display = al_create_display(DISPLAY_WIDTH, DISPLAY_HEIGHT);
 
     al_register_event_source(queue, al_get_display_event_source(display));
@@ -109,10 +114,11 @@ int main()
 
     grid_t *g = create_grid();
 
-    ALLEGRO_BITMAP * home = al_load_bitmap("home.png");
-    ALLEGRO_BITMAP * dog = al_load_bitmap("dog.png");
-    ALLEGRO_BITMAP * cat = al_load_bitmap("cat.png");
-    ALLEGRO_BITMAP * fish = al_load_bitmap("fish.png");
+    ALLEGRO_BITMAP *home = al_load_bitmap("home.png");
+    ALLEGRO_BITMAP *dog1 = al_load_bitmap("dog01.png");
+    ALLEGRO_BITMAP *cat1 = al_load_bitmap("cat-1.png");
+    ALLEGRO_BITMAP *cat2 = al_load_bitmap("cat-2.png");
+    ALLEGRO_BITMAP *fish = al_load_bitmap("fish.png");
     al_start_timer(timer);
     while (1)
     {
@@ -127,10 +133,11 @@ int main()
             al_clear_to_color(al_map_rgb(190, 156, 84));
             draw_grid(g);
             // draw_square(s);
-            draw_image_at(home,g,7,7);
-            draw_image_at(fish,g,1,0);
-            draw_image_at(dog,g,2,3);
-            draw_image_at(cat,g,3,2);
+            draw_image_at(home, g, 7, 7);
+            draw_image_at(fish, g, 1, 0);
+            draw_image_at(dog1, g, 2, 3);
+            draw_image_at(cat1, g, 3, 2);
+            draw_image_at(cat2,g,5,7);
 
             al_flip_display();
             break;
