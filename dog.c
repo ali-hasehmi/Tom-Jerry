@@ -37,5 +37,6 @@ dog_t *create_dog(int _attack, int _defense, int _speed)
 
 int destroy_dog(dog_t *dog)
 {
+    al_destroy_bitmap(dog->image);
     free(dog);
 }
