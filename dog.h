@@ -14,7 +14,7 @@ typedef struct dog
     ALLEGRO_BITMAP *image;
 } dog_t;
 
-dog_t* create_dog(int attack,int defense,int speed,int x,int y);
+dog_t* create_dog(int attack,int defense,int speed);
 
 
 

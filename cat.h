@@ -8,22 +8,18 @@
 
 typedef struct cat
 {
-    int defense, attack, mouses;
-    int is_limited;
-    mouse_t mouse[18];
-    int x, y;
-    ALLEGRO_BITMAP *image;
-
-} cat_t;
-
-typedef struct player
-{
-    cat_t type;
     int point;
+    int defense, attack, mouses;
+    mouse_t mouse[18];
     int x, y;
     int actions;
     bool is_turn;
+    int is_limited;
     ALLEGRO_BITMAP *image;
-} player_t;
+} cat_t;
+
+cat_t* create_cat(int attack,int defense,int mouses);
+void update_cat();
+int destroy_cat();
 
 #endif //TOM_JERRY_CAT_H

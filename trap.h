@@ -11,4 +11,6 @@ typedef struct trap {
     ALLEGRO_BITMAP *image;
 }trap_t;
 
+trap_t * create_trap();
+
 #endif //TOM_JERRY_TRAP_H

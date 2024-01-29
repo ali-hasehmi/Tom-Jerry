@@ -13,4 +13,6 @@ typedef struct fish
     ALLEGRO_BITMAP *image;
 } fish_t;
 
+fish_t* create_fish();
+
 #endif //TOM_JERRY_FISH_H

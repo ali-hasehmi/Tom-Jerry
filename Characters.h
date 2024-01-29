@@ -6,6 +6,7 @@
 #include <allegro5/allegro.h>
 
 #include <stdbool.h>
+#include <stdlib.h>
 #include "fish.h"
 #include "cat.h"
 #include "dog.h"
