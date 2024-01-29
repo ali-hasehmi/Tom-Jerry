@@ -3,6 +3,7 @@
 #include "dog.h"
 #include "fish.h"
 #include "trap.h"
+#include "mouse.h"
 
 int main()
 {
@@ -21,6 +22,7 @@ int main()
     init_dog(g);
     init_fish(g);
     init_trap(g);
+    init_mouse(g);
 
     dog_t *b = create_dog(BULLDOG);
     dog_t *p = create_dog(PITBULL);
@@ -29,6 +31,10 @@ int main()
     fish_t *f = create_fish();
     fish_t *f2 = create_fish();
     trap_t *trap = create_trap();
+    mouse_t *m1 = create_mouse(ONE);
+    mouse_t *m2 = create_mouse(TWO);
+    mouse_t *m3 = create_mouse(THREE);
+
     al_start_timer(timer);
     printf("here\n");
     int i = 0, j = 0;
@@ -44,10 +50,10 @@ int main()
         case ALLEGRO_EVENT_TIMER:
             printf("this is\n");
             al_clear_to_color(al_map_rgb(190, 156, 84));
-            al_draw_line(0,1,1200,1,al_map_rgb(147,154,70),25);
-            al_draw_line(0,1,0,900,al_map_rgb(147,154,70),25);
-            al_draw_line(0,900,1200,900,al_map_rgb(147,154,70),25);
-            al_draw_line(1200,1,1200,900,al_map_rgb(147,154,70),25);
+            al_draw_line(0, 1, 1200, 1, al_map_rgb(147, 154, 70), 25);
+            al_draw_line(0, 1, 0, 900, al_map_rgb(147, 154, 70), 25);
+            al_draw_line(0, 900, 1200, 900, al_map_rgb(147, 154, 70), 25);
+            al_draw_line(1200, 1, 1200, 900, al_map_rgb(147, 154, 70), 25);
             // update_square(g->squares[4][4],TRAP,NULL);
             printf("1\n");
             update_dog(b, ++i, ++j);
@@ -64,6 +70,10 @@ int main()
             printf("7\n");
             update_trap(trap, rand() % 3);
             printf("8\n");
+            int x = rand() % 1 + 1;
+            update_mouse(m1, m1->x + x, m1->y + x - 1);
+            update_mouse(m2, m2->x + x-1, m2->y + x);
+            update_mouse(m3, m3->x + x, m3->y + x - 1);
             draw_grid(g);
             printf("9\n");
             al_flip_display();

@@ -19,7 +19,7 @@ grid_t *create_grid(const int _grid_w, const int _grid_h, const int _square_widt
     {
         for (size_t j = 1; j < g->width -1; ++j)
         {
-            bool is_wall = rand() % 5;
+            bool is_wall = rand() % 8;
             if (!is_wall)
             {
                 int direction = rand() % 4;

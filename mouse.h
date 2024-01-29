@@ -5,6 +5,8 @@
 
 #include <stdbool.h>
 
+#include "grid.h"
+
 typedef enum mice
 {
     ONE,
@@ -19,9 +21,11 @@ typedef struct mouse
     int speed;
     int x, y;
     int point;
+    bool is_alive;
     ALLEGRO_BITMAP *image;
 } mouse_t;
 
+void init_mouse(grid_t* g);
 mouse_t *create_mouse(mice_t type);
 void update_mouse(mouse_t *mouse, int _x, int _y);
 int destroy_mouse(mouse_t *mouse);
