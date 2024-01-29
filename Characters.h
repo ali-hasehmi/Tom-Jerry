@@ -6,6 +6,7 @@
 #include <allegro5/allegro.h>
 
 #include <stdbool.h>
+
 typedef enum state
 {
     nothing,
@@ -16,6 +17,7 @@ typedef enum state
     fish,
     bonus
 } state;
+
 typedef enum dogs
 {
     Bulldog,
@@ -23,6 +25,7 @@ typedef enum dogs
     Shepherd,
     Bulldog_jr
 } dogs;
+
 typedef enum mice
 {
     Four = 4,
@@ -35,6 +38,10 @@ typedef enum mice
 typedef struct square
 {
     state type;
+    int x1, y1;
+    int x2, y2;
+    int r, g, b;
+    void *character;
 
 } square_t;
 
@@ -65,11 +72,13 @@ typedef struct player
 
 typedef struct dog
 {
+
     dogs type;
     int attack, defense, speed;
     bool is_alive;
     int x, y;
     ALLEGRO_BITMAP *image;
+
 } dog_t;
 
 typedef struct fish

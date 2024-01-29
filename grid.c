@@ -68,6 +68,8 @@ void destroy_grid(grid_t *g)
     }
     free(g);
 }
+
+
 void draw_grid(grid_t *g)
 {
     for (size_t i = 0; i < 15; ++i)
@@ -91,6 +93,8 @@ void draw_image_at(ALLEGRO_BITMAP *image, grid_t *g, int _x, int _y)
                           g->squares[_y][_x]->x1, g->squares[_y][_x]->y1,
                           image_width * scale_x, image_width * scale_y, 0);
 }
+
+
 int main()
 {
 
