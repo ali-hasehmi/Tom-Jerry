@@ -111,6 +111,7 @@ int main()
 
     ALLEGRO_BITMAP * home = al_load_bitmap("home.png");
     ALLEGRO_BITMAP * dog = al_load_bitmap("dog.png");
+    ALLEGRO_BITMAP * cat = al_load_bitmap("cat.png");
     ALLEGRO_BITMAP * fish = al_load_bitmap("fish.png");
     al_start_timer(timer);
     while (1)
@@ -129,6 +130,8 @@ int main()
             draw_image_at(home,g,7,7);
             draw_image_at(fish,g,1,0);
             draw_image_at(dog,g,2,3);
+            draw_image_at(cat,g,3,2);
+
             al_flip_display();
             break;
         default:
