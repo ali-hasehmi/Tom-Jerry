@@ -1,4 +1,5 @@
 #include <allegro5/allegro.h>
+#include <allegro5/allegro_image.h>
 #include <allegro5/allegro_primitives.h>
 
 #define DISPLAY_HEIGHT 900
@@ -77,15 +78,28 @@ void draw_grid(grid_t *g)
         }
     }
 }
+
+void draw_image_at(ALLEGRO_BITMAP *image, grid_t *g, int _x, int _y)
+{
+    float scale_x, scale_y;
+    int image_width = al_get_bitmap_width(image);
+    int image_height = al_get_bitmap_height(image);
+    scale_x = (float)SQUARE_WIDTH / image_width;
+    // int image_height =al_get_bitmap_height(image);
+    scale_y = (float)SQUARE_HEIGHT / image_height;
+    al_draw_scaled_bitmap(image, 0, 0, image_width, image_height,
+                          g->squares[_y][_x]->x1, g->squares[_y][_x]->y1,
+                          image_width * scale_x, image_width * scale_y,0);
+}
 int main()
 {
 
     al_init();
     al_init_primitives_addon();
+    al_init_image_addon();
 
     ALLEGRO_TIMER *timer = al_create_timer(1.0 / 30.0);
     ALLEGRO_EVENT_QUEUE *queue = al_create_event_queue();
-
     ALLEGRO_DISPLAY *display = al_create_display(DISPLAY_WIDTH, DISPLAY_HEIGHT);
 
     al_register_event_source(queue, al_get_display_event_source(display));
@@ -95,6 +109,9 @@ int main()
 
     grid_t *g = create_grid();
 
+    ALLEGRO_BITMAP * home = al_load_bitmap("home.png");
+    ALLEGRO_BITMAP * dog = al_load_bitmap("dog.png");
+    ALLEGRO_BITMAP * fish = al_load_bitmap("fish.png");
     al_start_timer(timer);
     while (1)
     {
@@ -109,6 +126,9 @@ int main()
             al_clear_to_color(al_map_rgb(190, 156, 84));
             draw_grid(g);
             // draw_square(s);
+            draw_image_at(home,g,7,7);
+            draw_image_at(fish,g,1,0);
+            draw_image_at(dog,g,2,3);
             al_flip_display();
             break;
         default:
