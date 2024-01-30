@@ -151,20 +151,31 @@ int move_mouse(mouse_t *_m, mouse_t *cats[2])
     float distance_with_cat1 = distance(_m, cats[0]);
     float distance_with_cat2 = distance(_m, cats[1]);
     mouse_t *tmp_mouse = NULL;
-    do
-    {
-        printf("move_mouse(mouse_t , mouse_t ) : in move\n");
+    int cnt = 10;
+    while(1) {
+        if(cnt-- < 0) break;
         int rand_num = rand() % 8;
-        printf("move_mouse(mouse_t , mouse_t ) : phase1\n");
         new_x = _m->x + dir[rand_num][0];
-        printf("move_mouse(mouse_t , mouse_t ) : phase2\n");
         new_y = _m->y + dir[rand_num][1];
-        printf("move_mouse(mouse_t , mouse_t ) : phase3\n");
         tmp_mouse = create_mouse_with_xy(new_x, new_y);
-        printf("move_mouse(mouse_t , mouse_t ) : phase4\n");
+        if((!isValid(m_grid, _m->x, _m->y, new_x, new_y)))
+            continue;
+        else if(((m_grid->squares[new_y][new_x]->type == CAT) || (m_grid->squares[new_y][new_x]->type == MOUSE)))
+            continue;
+        else if(((distance(tmp_mouse, cats[0]) >= distance_with_cat1) && (distance(tmp_mouse, cats[1]) >= distance_with_cat2)))
+            break;
 
-    } while ((!isValid(m_grid, _m->x, _m->y, new_x, new_y)) && ((distance(tmp_mouse, cats[0]) > distance_with_cat1) || (distance(tmp_mouse, cats[1]) > distance_with_cat2))|| ((m_grid->squares[new_y][new_x]->type == CAT) || (m_grid->squares[new_y][new_x]->type == MOUSE)));
+
+    }
+    do {
+        printf("do while for infinite loop");
+        int rand_num = rand() % 8;
+        new_x = _m->x + dir[rand_num][0];
+        new_y = _m->y + dir[rand_num][1];
+    }while((!isValid(m_grid, _m->x, _m->y, new_x, new_y)));
+
     update_mouse(_m, new_x, new_y);
+    free(tmp_mouse);
 }
 
 void release_mouse(mouse_t *mouse)
