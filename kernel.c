@@ -16,6 +16,7 @@ bonus_t *bonus[8] = {NULL};
 ALLEGRO_DISPLAY *display = NULL;
 ALLEGRO_EVENT_QUEUE *queue = NULL;
 ALLEGRO_TIMER *timer = NULL;
+ALLEGRO_FONT *font = NULL;
 
 void init_kernel()
 {
@@ -40,7 +41,8 @@ void init_kernel()
     // Create Display
     printf("phase 5\n");
     display = al_create_display(1500, 900);
-
+    // Crate Font
+    font = al_create_builtin_font();
     // Register Event Sources
     printf("phase 4.1\n");
     al_register_event_source(queue, al_get_display_event_source(display));
@@ -111,6 +113,7 @@ void init_kernel()
     {
         bonus[i] = create_bonus();
     }
+
     printf("phase 14\n");
     al_start_timer(timer);
 }
@@ -149,6 +152,7 @@ void updateDisplay()
     al_draw_line(0, 900, 1200, 900, al_map_rgb(147, 154, 70), 25);
     al_draw_line(1200, 1, 1200, 900, al_map_rgb(147, 154, 70), 25);
     printf(" Update2\n");
+
     for (int i = 0; i < 2; ++i)
     {
         update_cat(players[i], players[i]->x, players[i]->y);
@@ -174,6 +178,7 @@ void updateDisplay()
         update_bonus(bonus[i]);
     }
     draw_grid(map_grid);
+    al_draw_textf(font, al_map_rgb(0, 0, 0), map_grid->height * 80 + 30, 10, 0, "Player1 - defense: %d - attack: %d", players[0]->defense, players[0]->defense);
     al_flip_display();
 }
 
