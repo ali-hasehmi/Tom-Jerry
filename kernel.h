@@ -5,7 +5,8 @@
 
 void init_kernel();
 void cleanup_kernel();
-void turn(cat_t* cat);
+void updateDisplay();
+void turn_player(cat_t* cat);
 void game();
 
 

@@ -92,9 +92,9 @@ void stayOnTrap(cat_t *cat)
                 cat->mouse[j] = NULL;
             }
             else if(cat->mouse[j] == NULL) {}
-            else if ((cat->mouse[i].point <= cat->mouse[j].point))
+            else if ((cat->mouse[i]->point <= cat->mouse[j]->point))
             {
-                mouse_t tmp = cat->mouse[j];
+                mouse_t* tmp = cat->mouse[j];
                 cat->mouse[j] = cat->mouse[i];
                 cat->mouse[i] = tmp;
             }

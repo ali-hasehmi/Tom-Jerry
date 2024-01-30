@@ -41,6 +41,12 @@ void update_dog(dog_t *dog, int _x, int _y)
     {
         return;
     }
+    if (dog->x == _x && dog->y == _y)
+    {
+        draw_image_at(dog->image, d_grid, dog->x, dog->y);
+        update_square(d_grid->squares[dog->y][dog->x], DOG, (void *)dog);
+        return;
+    }
     update_square(d_grid->squares[dog->y][dog->x], NOTHING, NULL);
     dog->x = _x;
     dog->y = _y;
@@ -132,6 +138,6 @@ int move_dog(dog_t *_dog)
         new_x = _dog->x + dir[rand_num][0];
         new_y = _dog->y + dir[rand_num][1];
     } while (!isValid(d_grid, _dog->x, _dog->y, new_x, new_y));
-    
-    update_dog(_dog,new_x,new_y);
+
+    update_dog(_dog, new_x, new_y);
 }

@@ -83,6 +83,12 @@ mouse_t *create_mouse(mice_t type)
 
 void update_mouse(mouse_t *mouse, int _x, int _y)
 {
+    if (mouse->x == _x && mouse->y == _y)
+    {
+        update_square(m_grid->squares[mouse->y][mouse->x], MOUSE, (void *)mouse);
+        draw_image_at(mouse->image, m_grid, mouse->x, mouse->y);
+        return;
+    }
     update_square(m_grid->squares[mouse->y][mouse->x], NOTHING, (void *)NULL);
     mouse->x = _x;
     mouse->y = _y;
@@ -95,7 +101,8 @@ int destroy_mouse(mouse_t *mouse)
     free(mouse);
 }
 
-void eat_mouse(mouse_t* _m) {
+void eat_mouse(mouse_t *_m)
+{
     _m->is_alive = false;
     update_square(m_grid->squares[_m->y][_m->x], NOTHING, NULL);
 }

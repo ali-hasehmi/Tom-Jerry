@@ -15,32 +15,42 @@ ALLEGRO_TIMER *timer = NULL;
 void init_kernel()
 {
     // initializing allegro
+    printf("phase 1\n");
     al_init();
     al_init_primitives_addon();
     al_init_image_addon();
     al_install_keyboard();
 
     // Create Allegro Objects
+    printf("phase 2\n");
     queue = al_create_event_queue();
     timer = al_create_timer(1.0 / 30.0);
 
     // Set New Attributes
+    printf("phase 3\n");
     al_set_new_display_option(ALLEGRO_SAMPLE_BUFFERS, 1, ALLEGRO_SUGGEST);
     al_set_new_display_option(ALLEGRO_SAMPLES, 8, ALLEGRO_SUGGEST);
     al_set_new_bitmap_flags(ALLEGRO_MIN_LINEAR | ALLEGRO_MAG_LINEAR);
 
-    // Register Event Sources
-    al_register_event_source(queue, al_get_display_event_source(display));
-    al_register_event_source(queue, al_get_timer_event_source(timer));
-    al_register_event_source(queue, al_get_keyboard_event_source());
 
     // Create Display
+    printf("phase 5\n");
     display = al_create_display(1200, 900);
+    
+    // Register Event Sources
+    printf("phase 4.1\n");
+    al_register_event_source(queue, al_get_display_event_source(display));
+    printf("phase 4.2\n");
+    al_register_event_source(queue, al_get_timer_event_source(timer));
+    printf("phase 4.3\n");
+    al_register_event_source(queue, al_get_keyboard_event_source());
 
     // Create Grid
+    printf("phase 6\n");
     map_grid = create_grid(15, 15, 80, 60);
 
     // Initializing Objects
+    printf("phase 7\n");
     init_cat(map_grid);
     init_dog(map_grid);
     init_fish(map_grid);
@@ -48,37 +58,43 @@ void init_kernel()
     init_trap(map_grid);
 
     // Create Players
+    printf("phase 8\n");
     for (int i = 0; i < 2; ++i)
     {
         players[i] = create_cat();
     }
 
+    printf("phase 9\n");
     // Create Dogs
     for (int i = 0; i < 4; ++i)
     {
         dogs[i] = create_dog(i);
     }
 
+    printf("phase 10\n");
     // Create Mice
     for (int i = 0; i < 4; i++)
     {
         mice[i] = create_mouse(THREE);
     }
+    printf("phase 11\n");
     for (int i = 4; i < 10; i++)
     {
         mice[i] = create_mouse(TWO);
     }
+    printf("phase 12\n");
     for (int i = 10; i < 18; i++)
     {
         mice[i] = create_mouse(ONE);
     }
 
+    printf("phase 13\n");
     // Create Fishes
     for (int i = 0; i < 10; ++i)
     {
         fishes[i] = create_fish();
     }
-
+    printf("phase 14\n");
     al_start_timer(timer);
 }
 
@@ -107,34 +123,97 @@ void cleanup_kernel()
     al_destroy_display(display);
 }
 
-void turn(cat_t *cat)
+void updateDisplay()
 {
+    printf("update1\n");
+    al_clear_to_color(al_map_rgb(190, 156, 84));
+    al_draw_line(0, 1, 1200, 1, al_map_rgb(147, 154, 70), 25);
+    al_draw_line(0, 1, 0, 900, al_map_rgb(147, 154, 70), 25);
+    al_draw_line(0, 900, 1200, 900, al_map_rgb(147, 154, 70), 25);
+    al_draw_line(1200, 1, 1200, 900, al_map_rgb(147, 154, 70), 25);
+    printf(" Update2\n");
+    for (int i = 0; i < 2; ++i)
+    {
+        update_cat(players[i], players[i]->x, players[i]->y);
+    }
+    for (int i = 0; i < 4; ++i)
+    {
+        update_dog(dogs[i], dogs[i]->x, dogs[i]->y);
+    }
+    for (int i = 0; i < 18; ++i)
+    {
+        update_mouse(mice[i], mice[i]->x, mice[i]->y);
+    }
+    for (int i = 0; i < 10; ++i)
+    {
+        update_fish(fishes[i]);
+    }
+    draw_grid(map_grid);
+    al_flip_display();
 }
 
-void game(grid_t *map)
+void turn_player(cat_t *cat)
 {
-    map_grid = map;
-    cat_t *cat_one = create_cat();
-    cat_t *cat_two = create_cat();
-    dog_t *dogs[4]; // Weakest to Strongest:0->3
-    mouse_t *mice[18];
-    for (int i = 0; i < 4; i++)
-        dogs[i] = create_dog(i);
-    for (int i = 0; i < 4; i++)
+    if (cat->is_limited)
     {
-        mice[i] = create_mouse(THREE);
+        printf("is limited\n");
+        cat->is_limited--;
+        return;
     }
-    for (int i = 4; i < 10; i++)
+    printf("1\n");
+    bool redraw = false;
+    int dx = 0, dy = 0;
+    while (cat->actions > 0 && !cat->is_limited)
     {
-        mice[i] = create_mouse(TWO);
+        ALLEGRO_EVENT e;
+        al_wait_for_event(queue, &e);
+        switch (e.type)
+        {
+        case ALLEGRO_EVENT_KEY_DOWN:
+            if (e.keyboard.keycode == ALLEGRO_KEY_RIGHT)
+            {
+                dx = 1;
+                dy = 0;
+            }
+            if (e.keyboard.keycode == ALLEGRO_KEY_DOWN)
+            {
+                dx = 0;
+                dy = 1;
+            }
+            if (e.keyboard.keycode == ALLEGRO_KEY_LEFT)
+            {
+                dx = -1;
+                dy = 0;
+            }
+            if (e.keyboard.keycode == ALLEGRO_KEY_UP)
+            {
+                dx = 0;
+                dy = -1;
+            }
+            if (!move_cat(cat, dx, dy))
+            {
+                redraw = true;
+            }
+            break;
+        default:
+            fprintf(stderr, "Invalid Key INPUT\n");
+            break;
+        }
+        if (redraw)
+        {
+            updateDisplay();
+            redraw = false;
+        }
     }
-    for (int i = 10; i < 18; i++)
+}
+
+void game()
+{
+    updateDisplay();
+    bool is_done = false;
+    while (!is_done)
     {
-        mice[i] = create_mouse(ONE);
-    }
-    while (1)
-    {
-        turn(cat_one);
-        turn(cat_two);
+        turn_player(players[0]);
+        turn_player(players[1]);
     }
 }

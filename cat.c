@@ -27,6 +27,7 @@ cat_t *create_cat()
     cat->defense = 5;
     cat->attack = 2;
     cat->mouses = 0;
+    cat->is_limited = 0;
     cat->image = cat_image1;
     for (int i = 0; i < 18; i++)
     {
@@ -40,6 +41,13 @@ cat_t *create_cat()
 }
 void update_cat(cat_t *cat, int _x, int _y)
 {
+    if (cat->x == _x && cat->y == _y)
+    {
+        update_square(c_grid->squares[cat->y][cat->x], CAT, (void *)CAT);
+        draw_image_at(cat->image, c_grid, cat->x, cat->y);
+        return;
+    }
+
     int result = 2;
     update_square(c_grid->squares[cat->y][cat->x], NOTHING, (void *)NULL);
     // switch (state)
@@ -56,12 +64,12 @@ void update_cat(cat_t *cat, int _x, int _y)
     {
 
     case DOG:
-        result = combatDogs(cat,(dog_t*)character);
+        result = combatDogs(cat, (dog_t *)character);
         // Combat with dog
         break;
 
     case CAT:
-        result = combatCats(cat,(cat_t*)character);
+        result = combatCats(cat, (cat_t *)character);
         // Combat with another Cat
         break;
 
@@ -73,11 +81,10 @@ void update_cat(cat_t *cat, int _x, int _y)
         break;
 
     case MOUSE:
-        stayOnMouse(cat,(mouse_t*)character);
+        stayOnMouse(cat, (mouse_t *)character);
         eat_mouse((mouse_t *)character);
         // Capture Mouse and Gain Point
         break;
-
 
     default:
         break;
@@ -91,15 +98,21 @@ void update_cat(cat_t *cat, int _x, int _y)
         // Reduce Attack by 2
         // Reduce Energy by 3
     }
-    if(c_grid->squares[_y][_x]->is_bonus) {
+    if (c_grid->squares[_y][_x]->is_bonus)
+    {
         cat->attack++;
         c_grid->squares[_y][_x]->is_bonus = false;
     }
     cat->x = _x;
     cat->y = _y;
-    if(result) {
-        update_square(c_grid->squares[cat->y][cat->x], CAT, (void *) CAT);
+    if (result)
+    {
+        update_square(c_grid->squares[cat->y][cat->x], CAT, (void *)CAT);
         draw_image_at(cat->image, c_grid, cat->x, cat->y);
+    }
+    else
+    {
+        cat->is_limited = 2;
     }
 }
 
@@ -118,5 +131,7 @@ int move_cat(cat_t *_cat, int _dx, int _dy)
     {
         return -1;
     }
+    _cat->actions--;
     update_cat(_cat, _cat->x + _dx, _cat->y + _dy);
+    return 0;
 }

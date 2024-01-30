@@ -87,11 +87,11 @@ void update_square(square_t *s, state_t _new_type, void *_new_character)
         s->b = 41;
         break;
 
-    case BONUS:
-        s->r = 244;
-        s->g = 151;
-        s->b = 20;
-        break;
+    // case BONUS:
+    //     s->r = 244;
+    //     s->g = 151;
+    //     s->b = 20;
+    //     break;
 
     default:
         fprintf(stderr, "update_square():Not valid state");
