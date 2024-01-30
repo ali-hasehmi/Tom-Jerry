@@ -34,8 +34,9 @@ void miceAdder(cat_t* cat_one,cat_t* cat_two) {
 
 int combatCats(cat_t *cat_one,cat_t *cat_two)
 {
+    printf("combatCats called\n");
     if(cat_one == NULL || cat_two== NULL) {
-        fprintf(stderr,"nullptr");
+        fprintf(stderr,"combatCats(cat_t *,cat_t *) : nullptr\n");
         return 1;
     }
     printf("%d %d %d %d",cat_two->attack,cat_two->defense,cat_one->attack,cat_one->defense);

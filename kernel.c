@@ -235,7 +235,7 @@ void turn_mouse(mouse_t* mouse) {
     cats[1] = create_mouse_with_xy(players[1]->x , players[1]->y);
     printf("mouse 1");
     while(mouse->actions > 0) {
-        Sleep(rand() % 1000 + 1000);
+        Sleep(rand() % 1000 + 100);
         move_mouse(mouse,cats);
         updateDisplay();
         mouse->actions--;

@@ -60,14 +60,14 @@ void update_cat(cat_t *cat, int _x, int _y)
     }
     if (cat->x == _x && cat->y == _y)
     {
-        update_square(c_grid->squares[cat->y][cat->x], CAT, (void *)CAT);
+        update_square(c_grid->squares[cat->y][cat->x], CAT, (void *)cat);
         draw_image_at(cat->image, c_grid, cat->x, cat->y);
         return;
     }
 
     int result = 2; 
     update_square(c_grid->squares[cat->y][cat->x], NOTHING, (void *)NULL);
-    printf("Error here");
+    printf("Error here\n");
     void *character = c_grid->squares[_y][_x]->character;
     switch (c_grid->squares[_y][_x]->type)
     {
@@ -78,7 +78,7 @@ void update_cat(cat_t *cat, int _x, int _y)
         break;
 
     case CAT:
-
+        printf("phase 1\n");
         result = combatCats(cat, (cat_t *)character);
         // Combat with another Cat
         break;
@@ -118,7 +118,7 @@ void update_cat(cat_t *cat, int _x, int _y)
     cat->y = _y;
     if (result)
     {
-        update_square(c_grid->squares[cat->y][cat->x], CAT, (void *)CAT);
+        update_square(c_grid->squares[cat->y][cat->x], CAT, (void *)cat);
         draw_image_at(cat->image, c_grid, cat->x, cat->y);
     }
     else
