@@ -280,7 +280,7 @@ void turn_dog(dog_t *dog)
 
     while (dog->actions > 0)
     {
-        Sleep(rand() % 1000 + 500);
+        Sleep(rand() % 100 + 100);
         move_dog(dog);
         updateDisplay();
         dog->actions--;
@@ -300,7 +300,7 @@ void turn_mouse(mouse_t *mouse)
     printf("mouse 1");
     while (mouse->actions > 0)
     {
-        Sleep(rand() % 1000 + 100);
+        Sleep(rand() % 100 + 100);
         move_mouse(mouse, cats);
         updateDisplay();
         mouse->actions--;
