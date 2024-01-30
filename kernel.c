@@ -13,12 +13,12 @@ trap_t *traps[8] = {NULL};
 bonus_t *bonus[8] = {NULL};
 int turn_num = 15;
 
-
 /// ALLEGRO STUFF
 ALLEGRO_DISPLAY *display = NULL;
 ALLEGRO_EVENT_QUEUE *queue = NULL;
 ALLEGRO_TIMER *timer = NULL;
 ALLEGRO_FONT *font = NULL;
+ALLEGRO_BITMAP *main_icon = NULL;
 
 void init_kernel()
 {
@@ -42,7 +42,17 @@ void init_kernel()
 
     // Create Display
     printf("phase 5\n");
-    display = al_create_display(1800, 900);
+    display = al_create_display(1600, 900);
+
+    main_icon = al_load_bitmap("./asset/main.png");
+    if (main_icon == NULL)
+    {
+        fprintf(stderr, "init_kernel() :couldn't load main Icon\n");
+    }
+    else
+    {
+        al_set_display_icon(display, main_icon);
+    }
     // Crate Font
     font = al_create_builtin_font();
     // Register Event Sources
@@ -192,16 +202,18 @@ void updateDisplay()
     {
         al_draw_textf(font, al_map_rgb(0, 0, 0),
                       map_grid->height * 80 + 15, 20, 0, "Player1 - defense: %d - attack: %d - point: %d", players[0]->defense, players[0]->attack, players[0]->point);
-        
     }
-    if(players[1]->is_turn){
+    if (players[1]->is_turn)
+    {
         al_draw_textf(font, al_map_rgb(210, 0, 0),
-                  map_grid->height * 80 + 15, 40, 0, "Player2 - defense: %d - attack: %d - point: %d", players[1]->defense, players[1]->attack, players[1]->point);
-    }else{
-    al_draw_textf(font, al_map_rgb(0, 0, 0),
-                  map_grid->height * 80 + 15, 40, 0, "Player2 - defense: %d - attack: %d - point: %d", players[1]->defense, players[1]->attack, players[1]->point);
-    } 
-    al_draw_textf(font,al_map_rgb(0,0,0),map_grid->height * 80 + 15,65,0,"Number Of Turn: %d",15-turn_num);
+                      map_grid->height * 80 + 15, 40, 0, "Player2 - defense: %d - attack: %d - point: %d", players[1]->defense, players[1]->attack, players[1]->point);
+    }
+    else
+    {
+        al_draw_textf(font, al_map_rgb(0, 0, 0),
+                      map_grid->height * 80 + 15, 40, 0, "Player2 - defense: %d - attack: %d - point: %d", players[1]->defense, players[1]->attack, players[1]->point);
+    }
+    al_draw_textf(font, al_map_rgb(0, 0, 0), map_grid->height * 80 + 15, 65, 0, "Number Of Turn: %d", 15 - turn_num);
     al_flip_display();
 }
 
@@ -218,7 +230,7 @@ void turn_player(cat_t *cat)
     bool redraw = false;
     bool end_turn = false;
     int dx = 0, dy = 0;
-    while (cat->actions > 0 && !cat->is_limited && !end_turn && cat->defense>0)
+    while (cat->actions > 0 && !cat->is_limited && !end_turn && cat->defense > 0)
     {
         dx = dy = 0;
         ALLEGRO_EVENT e;
@@ -256,6 +268,10 @@ void turn_player(cat_t *cat)
                 redraw = true;
             }
 
+            break;
+
+        case ALLEGRO_EVENT_DISPLAY_CLOSE:
+            exit(1);
             break;
         default:
             //            fprintf(stderr, "Invalid Key INPUT\n");
@@ -312,17 +328,18 @@ void turn_mouse(mouse_t *mouse)
     free(cats[1]);
 }
 
-int fish_counter() {
+int fish_counter()
+{
     int cnt = 0;
-    for(int i = 0 ; i < 10 ; i++)
-        if(fishes[i]->is_alive)
+    for (int i = 0; i < 10; i++)
+        if (fishes[i]->is_alive)
             cnt++;
     return cnt;
 }
 
 void game()
 {
-    
+
     updateDisplay();
     bool is_done = false;
     while (!is_done)
@@ -339,11 +356,12 @@ void game()
         {
             turn_mouse(mice[i]);
         }
-        if(fish_counter() < 2)
-            for(int i = 0 ; i < 10;i++)
+        if (fish_counter() < 2)
+            for (int i = 0; i < 10; i++)
                 fishes[i]->is_alive = true;
         turn_num--;
-        if(turn_num < 0 ){
+        if (turn_num < 0)
+        {
             is_done = true;
         }
     }
