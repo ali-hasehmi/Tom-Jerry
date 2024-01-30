@@ -96,5 +96,6 @@ int destroy_mouse(mouse_t *mouse)
 }
 
 void eat_mouse(mouse_t* _m) {
+    _m->is_alive = false;
     update_square(m_grid->squares[_m->y][_m->x], NOTHING, NULL);
 }

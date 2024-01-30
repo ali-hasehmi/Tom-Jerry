@@ -37,7 +37,7 @@ int combatCats(cat_t *cat_one,cat_t *cat_two)
         cat_one->defense = 0;
         miceAdder(cat_two,cat_one);
         cat_one->is_limited = 2;
-        return 2;
+        return 1;
     }
     else if ((cat_two->attack * cat_two->defense) < (cat_one->defense * cat_one->attack))
     {
@@ -46,11 +46,11 @@ int combatCats(cat_t *cat_one,cat_t *cat_two)
         cat_two->defense = 0;
         miceAdder(cat_one,cat_two);
         cat_two->is_limited = 2;
-        return 1;
+        return 0;
     }
     else
     {
-        return 0;
+        return -1;
     }
 }
 
@@ -68,11 +68,11 @@ int combatDogs(cat_t *cat, dog_t *dog)
         cat->defense = 0;
         miceAdder(cat,NULL);
         cat->is_limited = 2;
-        return 2;
+        return 0;
     }
     else
     {
-        return 0;
+        return -1;
     }
 }
 

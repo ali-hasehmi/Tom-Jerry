@@ -40,6 +40,7 @@ cat_t *create_cat()
 }
 void update_cat(cat_t *cat, int _x, int _y)
 {
+    int result = 2;
     update_square(c_grid->squares[cat->y][cat->x], NOTHING, (void *)NULL);
     // switch (state)
     // {
@@ -55,12 +56,12 @@ void update_cat(cat_t *cat, int _x, int _y)
     {
 
     case DOG:
-        int result = combatDogs(cat,(dog_t*)character);
+        result = combatDogs(cat,(dog_t*)character);
         // Combat with dog
         break;
 
     case CAT:
-        combatCats(cat,(cat_t*)character);
+        result = combatCats(cat,(cat_t*)character);
         // Combat with another Cat
         break;
 
@@ -96,8 +97,10 @@ void update_cat(cat_t *cat, int _x, int _y)
     }
     cat->x = _x;
     cat->y = _y;
-    update_square(c_grid->squares[cat->y][cat->x], CAT, (void *)CAT);
-    draw_image_at(cat->image, c_grid, cat->x, cat->y);
+    if(result) {
+        update_square(c_grid->squares[cat->y][cat->x], CAT, (void *) CAT);
+        draw_image_at(cat->image, c_grid, cat->x, cat->y);
+    }
 }
 
 int destroy_cat(cat_t *cat)
