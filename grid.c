@@ -75,6 +75,7 @@ void draw_grid(grid_t *g)
 
 void draw_image_at(ALLEGRO_BITMAP *image, grid_t *g, int _x, int _y)
 {
+
     float scale_x, scale_y;
     printf("draw_image1.1\n");
     int image_width = al_get_bitmap_width(image);
@@ -93,6 +94,7 @@ void draw_image_at(ALLEGRO_BITMAP *image, grid_t *g, int _x, int _y)
 bool isValid(grid_t *g, int _x1, int _y1, int _x2, int _y2)
 {
     // if _x2 and _y2 are out Of bound
+    printf("isValid(grid_t , int , int , int , int) called\n");
     if (_x2 > g->width - 1 || _y2 > g->height - 1 || _x2 < 0 || _y2 < 0)
     {
         return false;
