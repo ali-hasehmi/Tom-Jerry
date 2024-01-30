@@ -5,25 +5,25 @@
 void miceAdder(cat_t* cat_one,cat_t* cat_two) {
     if(cat_two == NULL) {
         for(int i = 0 ; i < 18 ; i++) {
-           cat_one->mouse[i] = *(create_mouse(DEAD));
+           cat_one->mouse[i] = NULL;
         }
         cat_one->mouses = 0;
     }
     else {
-        mouse_t new_mouses[18];
+        mouse_t* new_mouses[18];
         int itr = 0;
         for(int i = 0 ; i < 18 ; i++) {
-            if( cat_one->mouse[i].type != DEAD ) {
+            if( cat_one->mouse[i]) {
                 new_mouses[itr++] = cat_one->mouse[i];
             }
         }
         for(int i = 0 ; i < 18 ; i++) {
-            if( cat_two->mouse[i].type != DEAD ) {
+            if( cat_two->mouse[i]) {
                 new_mouses[itr++] = cat_two->mouse[i];
             }
         }
         cat_one->mouses += cat_two->mouses;
-        cat_two->mouses = 0;
+        miceAdder(cat_two,NULL);
     }
 }
 
@@ -87,7 +87,12 @@ void stayOnTrap(cat_t *cat)
     {
         for (int j = i + 1; j < cat->mouses; j++)
         {
-            if ((cat->mouse[i].point <= cat->mouse[j].point) && cat->mouse[i].type != DEAD && cat->mouse[j].type != DEAD)
+            if(cat->mouse[i] == NULL) {
+                cat->mouse[i] = cat->mouse[j];
+                cat->mouse[j] = NULL;
+            }
+            else if(cat->mouse[j] == NULL) {}
+            else if ((cat->mouse[i].point <= cat->mouse[j].point))
             {
                 mouse_t tmp = cat->mouse[j];
                 cat->mouse[j] = cat->mouse[i];
@@ -97,8 +102,7 @@ void stayOnTrap(cat_t *cat)
     }
     if (cat->mouses)
     {
-
-        cat->mouse[0].point = 0;
+        cat->mouse[0] = NULL;
         cat->mouses--;
     }
     else if (cat->attack > 2)
@@ -106,3 +110,14 @@ void stayOnTrap(cat_t *cat)
     else if (cat->attack <= 2)
         cat->defense -= 3;
 }
+
+void stayOnMouse(cat_t * cat, mouse_t* mouse) {
+    for(int i = 0 ; i < 18 ; i++) {
+        if(cat->mouse[i] == NULL) {
+            cat->mouse[i] = mouse;
+            break;
+        }
+    }
+    cat->mouses++;
+}
+

@@ -29,5 +29,6 @@ void init_mouse(grid_t* g);
 mouse_t *create_mouse(mice_t type);
 void update_mouse(mouse_t *mouse, int _x, int _y);
 int destroy_mouse(mouse_t *mouse);
+void eat_mouse(mouse_t* mouse);
 
 #endif // TOM_JERRY_MOUSE_H

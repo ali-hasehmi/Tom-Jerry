@@ -1,4 +1,5 @@
 #include "cat.h"
+#include "Functions.h"
 
 grid_t *c_grid = NULL;
 
@@ -29,7 +30,7 @@ cat_t *create_cat()
     cat->image = cat_image1;
     for (int i = 0; i < 18; i++)
     {
-        cat->mouse[i] = *(create_mouse(DEAD));
+        cat->mouse[i] = NULL;
     }
     cat->x = c_grid->width / 2;
     cat->y = c_grid->height / 2;
@@ -69,10 +70,14 @@ void update_cat(cat_t *cat, int _x, int _y)
         break;
 
     case MOUSE:
+        stayOnMouse(cat,(mouse_t*)character);
+        eat_mouse((mouse_t *)character);
         // Capture Mouse and Gain Point
         break;
 
     case BONUS:
+        cat->attack++;
+
         // Eat Bonus and gain Power(Attack)
         break;
 

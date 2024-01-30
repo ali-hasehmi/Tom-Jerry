@@ -17,7 +17,7 @@ typedef struct cat
 {
     int point;
     int defense, attack, mouses;
-    mouse_t mouse[18];
+    mouse_t* mouse[18];
     int x, y;
     int actions;
     bool is_turn;

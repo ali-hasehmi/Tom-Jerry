@@ -15,7 +15,6 @@ typedef enum state
     CAT,
     DOG,
     FISH,
-    BONUS,
 } state_t;
 
 typedef struct square
@@ -26,6 +25,7 @@ typedef struct square
     int r, g, b;
     void *character;
     bool is_trap;
+    bool is_bonus;
     bool walls[4]; // 0 : left, 1 : up, 2 : right ,3 : down
 } square_t;
 

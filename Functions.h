@@ -10,4 +10,5 @@ int dice();
 void stayOnFish(cat_t *cat, fish_t *fish);
 void stayOnBonus(cat_t *cat);
 void stayOnTrap(cat_t *cat);
+void stayOnMouse(cat_t* cat,mouse_t* mouse);
 #endif // TOM_JERRY_FUNCTIONS_H
