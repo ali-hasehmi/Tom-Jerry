@@ -133,9 +133,9 @@ void stayOnTrap(cat_t *cat)
     if (cat->mouses)
     {
         release_mouse(cat->mouse[0]);
+        cat->point -= cat->mouse[0]->point;
         cat->mouse[0] = NULL;
         cat->mouses--;
-        cat->point--;
     }
     else if (cat->attack > 2)
         cat->attack -= 2;
