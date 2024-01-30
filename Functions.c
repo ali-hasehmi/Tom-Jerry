@@ -37,7 +37,7 @@ void miceAdder(cat_t *cat_one, cat_t *cat_two)
         printf("loops ended\n");
         cat_one->mouses += cat_two->mouses;
         cat_one->point += cat_two->mouses;
-        cat_two = 0;
+        cat_two->point = 0;
         miceAdder(cat_two, NULL);
     }
 }
