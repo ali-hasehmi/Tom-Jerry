@@ -177,7 +177,9 @@ void updateDisplay()
     {
         update_bonus(bonus[i]);
     }
+
     draw_grid(map_grid);
+    
     al_draw_textf(font, al_map_rgb(0, 0, 0),
                   map_grid->height * 80 + 15, 20, 0, "Player1 - defense: %d - attack: %d - point: %d", players[0]->defense, players[0]->attack, players[0]->point);
 
