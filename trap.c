@@ -17,7 +17,7 @@ void init_trap(grid_t *g)
 trap_t *create_trap()
 {
     trap_t *trap = (trap_t *)malloc(sizeof(trap_t));
-    trap->is_reveal = false;
+    trap->is_reveal = true;
     trap->image = trap_image;
     do
     {

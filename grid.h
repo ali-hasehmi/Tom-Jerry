@@ -7,7 +7,7 @@
 #define SQUARE_HEIGHT DISPLAY_HEIGHT / 15
 #define SQUARE_WIDTH DISPLAY_WIDTH / 15
 
-#include "Characters.h"
+#include "square.h"
 
 typedef struct grid
 {

@@ -5,7 +5,7 @@
 
 #include <stdbool.h>
 
-#include "grid.h"
+typedef struct grid grid_t;
 
 typedef struct trap
 {

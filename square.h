@@ -7,7 +7,8 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-#include "Characters.h"
+
+typedef struct trap trap_t;
 
 typedef enum state
 {
