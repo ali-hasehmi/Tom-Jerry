@@ -42,7 +42,9 @@ cat_t *create_cat()
 }
 void update_cat(cat_t *cat, int _x, int _y)
 {
-    
+    if(cat->is_limited){
+        return;
+    }
     if (cat->x == _x && cat->y == _y)
     {
         update_square(c_grid->squares[cat->y][cat->x], CAT, (void *)CAT);
