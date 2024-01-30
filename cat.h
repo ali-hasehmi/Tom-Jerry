@@ -6,7 +6,6 @@
 #include <stdbool.h>
 #include "mouse.h"
 #include "Characters.h"
-
 typedef enum status
 {
     ONFISH,

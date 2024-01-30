@@ -3,6 +3,7 @@
 #include "Characters.h"
 #include <time.h>
 #include <stdlib.h>
+#include <math.h>
 void miceAdder(cat_t* cat_one,cat_t* cat_two);
 int combatCats(cat_t *cat_one, cat_t *cat_two);
 int combatDogs(cat_t *cat, dog_t *dog);
@@ -11,4 +12,5 @@ void stayOnFish(cat_t *cat, fish_t *fish);
 void stayOnBonus(cat_t *cat);
 void stayOnTrap(cat_t *cat);
 void stayOnMouse(cat_t* cat,mouse_t* mouse);
+
 #endif // TOM_JERRY_FUNCTIONS_H

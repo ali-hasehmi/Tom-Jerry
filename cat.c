@@ -36,6 +36,7 @@ cat_t *create_cat(cat_type_t _t)
             cat->image = cat_image1;
             break;
         case CAT_TWO:
+            cat->image = cat_image1;
             //Upload second image for this cat.
             break;
         default:
