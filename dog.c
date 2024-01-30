@@ -62,25 +62,25 @@ dog_t *create_dog(dogtype_t type)
     {
     case PITBULL:
         dog->attack = 5;
-        dog->speed = 5;
+        dog->actions = dog->speed = 5;
         dog->defense = 30;
         dog->image = dog_image1;
         break;
     case BULLDOG:
         dog->attack = 2;
-        dog->speed = 2;
+        dog->actions = dog->speed = 2;
         dog->defense = 15;
         dog->image = dog_image2;
         break;
     case SHEPHERD:
         dog->attack = 2;
-        dog->speed = 3;
+        dog->actions = dog->speed = 3;
         dog->defense = 20;
         dog->image = dog_image3;
         break;
     case BULLDOGJR:
         dog->attack = 1;
-        dog->speed = 1;
+        dog->actions = dog->speed = 1;
         dog->defense = 5;
         dog->image = dog_image4;
         break;

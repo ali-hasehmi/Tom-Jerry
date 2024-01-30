@@ -1,6 +1,8 @@
 #include "kernel.h"
 #include "cat.h"
 
+#include <windows.h>
+
 grid_t *map_grid = NULL;
 cat_t *players[2] = {NULL, NULL};
 dog_t *dogs[4] = {NULL, NULL, NULL, NULL};
@@ -207,13 +209,34 @@ void turn_player(cat_t *cat)
     cat->actions = 3;
 }
 
+void turn_dog(dog_t *dog)
+{
+    if (!dog->is_alive)
+    {
+        return;
+    }
+
+    while (dog->actions > 0)
+    {
+        Sleep(rand() % 1000 + 500);
+        move_dog(dog);
+        updateDisplay();
+        dog->actions--;
+    }
+    dog->actions = dog->speed;
+}
+
 void game()
 {
     updateDisplay();
     bool is_done = false;
     while (!is_done)
     {
-        turn_player(players[0]);
-        turn_player(players[1]);
+        for(int i = 0 ; i < 2 ; ++i){
+            turn_player(players[i]);
+        }
+        for(int i = 0 ; i < 4 ; ++i){
+            turn_dog(dogs[i]);
+        }
     }
 }

@@ -7,6 +7,7 @@ void init_kernel();
 void cleanup_kernel();
 void updateDisplay();
 void turn_player(cat_t* cat);
+void turn_dog(dog_t* dog);
 void game();
 
 

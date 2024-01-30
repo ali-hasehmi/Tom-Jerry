@@ -18,6 +18,7 @@ typedef enum dogtype
 typedef struct dog
 {
     int attack, defense, speed;
+    int actions;
     bool is_alive;
     int x, y;
     ALLEGRO_BITMAP *image;
