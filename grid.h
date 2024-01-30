@@ -26,4 +26,5 @@ void draw_grid(grid_t *g);
 void draw_image_at(ALLEGRO_BITMAP *image, grid_t *g, int _x, int _y);
 
 bool isValid(grid_t *g,int _x1,int _y1,int _x2,int _y2);
+
 #endif // GRID_H

@@ -10,6 +10,7 @@ dog_t *dogs[4] = {NULL, NULL, NULL, NULL};
 mouse_t *mice[18] = {NULL};
 fish_t *fishes[10] = {NULL};
 trap_t *traps[8] = {NULL};
+bonus_t *bonus[8] = {NULL};
 
 /// ALLEGRO STUFF
 ALLEGRO_DISPLAY *display = NULL;
@@ -59,7 +60,8 @@ void init_kernel()
     init_fish(map_grid);
     init_mouse(map_grid);
     init_trap(map_grid);
-    
+    init_bonus(map_grid);
+
     // Create Players
     printf("phase 8\n");
     for (int i = 0; i < 2; ++i)
@@ -102,6 +104,12 @@ void init_kernel()
     for (int i = 0; i < 8; ++i)
     {
         traps[i] = create_trap();
+    }
+
+    // Create Bonus
+    for (int i = 0; i < 8; ++i)
+    {
+        bonus[i] = create_bonus();
     }
     printf("phase 14\n");
     al_start_timer(timer);
@@ -157,8 +165,13 @@ void updateDisplay()
     {
         update_fish(fishes[i]);
     }
-    for(int i = 0 ; i < 8 ; ++i){
+    for (int i = 0; i < 8; ++i)
+    {
         update_trap(traps[i]);
+    }
+    for (int i = 0; i < 8; ++i)
+    {
+        update_bonus(bonus[i]);
     }
     draw_grid(map_grid);
     al_flip_display();

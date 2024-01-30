@@ -14,5 +14,6 @@
 #include "square.h"
 #include "mouse.h"
 #include "trap.h"
+#include "bonus.h"
 
 #endif // TOM_JERRY_CHARACTERS_H

@@ -31,18 +31,19 @@ cat_t *create_cat(cat_type_t _t)
     cat->actions = 3;
     cat->mouses = 0;
     cat->is_limited = 0;
-    switch (_t) {
-        case CAT_ONE:
-            cat->image = cat_image1;
-            break;
-        case CAT_TWO:
-            cat->image = cat_image2;
-            //Upload second image for this cat.
-            break;
-        default:
-            break;
+    switch (_t)
+    {
+    case CAT_ONE:
+        cat->image = cat_image1;
+        break;
+    case CAT_TWO:
+        cat->image = cat_image2;
+        // Upload second image for this cat.
+        break;
+    default:
+        break;
     }
-    //cat->image = cat_image1;
+    // cat->image = cat_image1;
     for (int i = 0; i < 18; i++)
     {
         cat->mouse[i] = NULL;
@@ -55,7 +56,8 @@ cat_t *create_cat(cat_type_t _t)
 }
 void update_cat(cat_t *cat, int _x, int _y)
 {
-    if(cat->is_limited){
+    if (cat->is_limited)
+    {
         return;
     }
     if (cat->x == _x && cat->y == _y)
@@ -65,7 +67,7 @@ void update_cat(cat_t *cat, int _x, int _y)
         return;
     }
 
-    int result = 2; 
+    int result = 2;
     update_square(c_grid->squares[cat->y][cat->x], NOTHING, (void *)NULL);
     printf("Error here\n");
     void *character = c_grid->squares[_y][_x]->character;
@@ -112,7 +114,8 @@ void update_cat(cat_t *cat, int _x, int _y)
     }
     if (c_grid->squares[_y][_x]->is_bonus)
     {
-        cat->attack++;
+        cat->attack += c_grid->squares[_y][_x]->bonus->gift;
+        take_bonus(c_grid->squares[_y][_x]->bonus);
         c_grid->squares[_y][_x]->is_bonus = false;
     }
     cat->x = _x;

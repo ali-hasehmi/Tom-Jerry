@@ -7,7 +7,8 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-#include "bonus.h"
+
+typedef struct bonus bonus_t;
 
 typedef struct trap trap_t;
 

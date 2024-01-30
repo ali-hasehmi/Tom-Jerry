@@ -13,6 +13,8 @@ square_t *create_square(int x1, int y1, int x2, int y2)
     s->g = 156;
     s->b = 101;
     s->walls[0] = s->walls[1] = s->walls[2] = s->walls[3] = 0;
+    s->is_bonus = false;
+    s->bonus = NULL;
     s->character = NULL;
     s->is_trap = false;
     s->type = NOTHING;
