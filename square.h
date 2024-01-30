@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include "bonus.h"
 
 typedef struct trap trap_t;
 
@@ -27,6 +28,7 @@ typedef struct square
     int r, g, b;
     void *character;
     trap_t *trap;
+    bonus_t *bonus;
     bool is_trap;
     bool is_bonus;
     bool walls[4]; // 0 : left, 1 : up, 2 : right ,3 : down
