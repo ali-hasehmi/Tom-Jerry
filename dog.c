@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "dog.h"
+#include "Functions.h"
 
 ALLEGRO_BITMAP *dog_image1 = NULL;
 ALLEGRO_BITMAP *dog_image2 = NULL;
@@ -37,9 +38,14 @@ void init_dog(grid_t *g)
 
 void update_dog(dog_t *dog, int _x, int _y)
 {
+    int result;
     if (!dog->is_alive)
     {
         return;
+    }if (d_grid->squares[_y][_x]->type == CAT) {
+        result = combatDogs((cat_t*)d_grid->squares[_y][_x]->character,dog);
+        if(result) return;
+
     }
     if (dog->x == _x && dog->y == _y)
     {
@@ -47,6 +53,7 @@ void update_dog(dog_t *dog, int _x, int _y)
         update_square(d_grid->squares[dog->y][dog->x], DOG, (void *)dog);
         return;
     }
+
     update_square(d_grid->squares[dog->y][dog->x], NOTHING, NULL);
     dog->x = _x;
     dog->y = _y;
