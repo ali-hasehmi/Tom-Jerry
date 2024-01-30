@@ -150,7 +150,8 @@ int move_mouse(mouse_t *_m, mouse_t *cats[2])
         new_y = _m->y + dir[rand_num][1];
         tmp_mouse = create_mouse_with_xy(new_x, new_y);
     } while ((!isValid(m_grid, _m->x, _m->y, new_x, new_y)) &&
-             ((distance(tmp_mouse, cats[0]) > distance_with_cat1) ||
-              (distance(tmp_mouse, cats[1]) > distance_with_cat2)));
+             ((distance(tmp_mouse, cats[0]) > distance_with_cat1) &&
+              (distance(tmp_mouse, cats[1]) > distance_with_cat2)) && ( (
+            m_grid->squares[new_y][new_x]->type == FISH)));
     update_mouse(_m, new_x, new_y);
 }
