@@ -89,6 +89,7 @@ mouse_t *create_mouse_with_xy(int _x, int _y)
     mouse->x = _x;
     mouse->y = _y;
     mouse->type = DEAD;
+    return mouse;
 }
 
 void update_mouse(mouse_t *mouse, int _x, int _y)
@@ -149,8 +150,8 @@ int move_mouse(mouse_t *_m, mouse_t *cats[2])
     mouse_t *tmp_mouse = NULL;
     do
     {
-        printf("in move");
-        int rand_num = rand() % 8;
+        printf("move_mouse(mouse_t , mouse_t ) : in move\n");
+        int rand_num = rand() % 8; 
         new_x = _m->x + dir[rand_num][0];
         new_y = _m->y + dir[rand_num][1];
         tmp_mouse = create_mouse_with_xy(new_x, new_y);

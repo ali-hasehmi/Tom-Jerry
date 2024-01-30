@@ -217,7 +217,7 @@ void turn_player(cat_t *cat)
     bool redraw = false;
     bool end_turn = false;
     int dx = 0, dy = 0;
-    while (cat->actions > 0 && !cat->is_limited && !end_turn)
+    while (cat->actions > 0 && !cat->is_limited && !end_turn && cat->defense>0)
     {
         dx = dy = 0;
         ALLEGRO_EVENT e;
