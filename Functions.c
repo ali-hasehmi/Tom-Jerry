@@ -11,6 +11,7 @@ void miceAdder(cat_t *cat_one, cat_t *cat_two)
             cat_one->mouse[i] = NULL;
         }
         cat_one->mouses = 0;
+        cat_one->point = 0;
     }
     else
     {
@@ -35,6 +36,8 @@ void miceAdder(cat_t *cat_one, cat_t *cat_two)
         }
         printf("loops ended\n");
         cat_one->mouses += cat_two->mouses;
+        cat_one->point += cat_two->mouses;
+        cat_two = 0;
         miceAdder(cat_two, NULL);
     }
 }
@@ -86,6 +89,10 @@ int combatDogs(cat_t *cat, dog_t *dog)
     {
         cat->attack = 1;
         cat->defense = 0;
+        for(int i = 0 ; i < 18 ; i++) {
+            if(cat->mouse[i])
+                release_mouse(cat->mouse[i]);
+        }
         miceAdder(cat, NULL);
         cat->is_limited = 2;
         return 0;
@@ -125,8 +132,10 @@ void stayOnTrap(cat_t *cat)
     }
     if (cat->mouses)
     {
+        release_mouse(cat->mouse[0]);
         cat->mouse[0] = NULL;
         cat->mouses--;
+        cat->point--;
     }
     else if (cat->attack > 2)
         cat->attack -= 2;
@@ -145,4 +154,5 @@ void stayOnMouse(cat_t *cat, mouse_t *mouse)
         }
     }
     cat->mouses++;
+    cat->point += mouse->point;
 }

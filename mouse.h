@@ -33,5 +33,6 @@ void update_mouse(mouse_t *mouse, int _x, int _y);
 int destroy_mouse(mouse_t *mouse);
 void eat_mouse(mouse_t* mouse);
 int move_mouse(mouse_t* _m,mouse_t* cats[2]);
+void release_mouse(mouse_t * mouse);
 
 #endif // TOM_JERRY_MOUSE_H
