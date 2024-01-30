@@ -12,6 +12,7 @@ int main()
     al_init();
     al_init_primitives_addon();
     al_init_image_addon();
+    al_install_keyboard();
     ALLEGRO_EVENT_QUEUE *queue = al_create_event_queue();
     ALLEGRO_TIMER *timer = al_create_timer(1.0);
 
@@ -19,6 +20,7 @@ int main()
 
     al_register_event_source(queue, al_get_timer_event_source(timer));
     al_register_event_source(queue, al_get_display_event_source(display));
+    al_register_event_source(queue,al_get_keyboard_event_source());
     grid_t *g = create_grid(15, 15, 80, 60);
     init_dog(g);
     init_fish(g);
@@ -40,6 +42,7 @@ int main()
     al_start_timer(timer);
     printf("here\n");
     int i = 0, j = 0;
+    int dx = 0 , dy = 0;
     while (1)
     {
         ALLEGRO_EVENT e;
@@ -76,10 +79,33 @@ int main()
             // update_mouse(m1, m1->x + x, m1->y + x - 1);
             // update_mouse(m2, m2->x + x - 1, m2->y + x);
             // update_mouse(m3, m3->x + x, m3->y + x - 1);
-            update_cat(cat,(++i + 6) % 8,(++j + 1) % 5);
+             update_cat(cat,cat->x ,cat->y);
             draw_grid(g);
             printf("9\n");
             al_flip_display();
+            break;
+        case ALLEGRO_EVENT_KEY_DOWN:
+            if(e.keyboard.keycode == ALLEGRO_KEY_RIGHT){
+                dx = 1;
+                dy = 0;
+            }
+            if(e.keyboard.keycode == ALLEGRO_KEY_DOWN){
+                dx = 0;
+                dy = 1;
+            }
+            if(e.keyboard.keycode == ALLEGRO_KEY_LEFT){
+                dx = -1;
+                dy = 0;
+            }
+            if(e.keyboard.keycode == ALLEGRO_KEY_UP){
+                dx = 0;
+                dy = -1;
+            }
+            // if(e.keyboard.keycode == ALLEGRO_KEY_RIGHT){
+            //     dx = 1;
+            //     dy = 0;
+            // }
+            move_cat(cat,dx,dy);
             break;
         default:
             printf("NOTHING\n");

@@ -49,7 +49,7 @@ void update_cat(cat_t *cat, int _x, int _y)
     //     cat->attack++;
     //     break;
     // }
-    
+
     cat->x = _x;
     cat->y = _y;
     update_square(c_grid->squares[cat->y][cat->x], CAT, (void *)CAT);
@@ -59,4 +59,16 @@ void update_cat(cat_t *cat, int _x, int _y)
 int destroy_cat(cat_t *cat)
 {
     free(cat);
+}
+
+int move_cat(cat_t *_cat, int _dx, int _dy)
+{
+    if (!isValid(c_grid, _cat->x, _cat->y, _cat->x + _dx, _cat->y + _dy))
+    {
+        return 1;
+    }
+    if(_cat->actions <0){
+        return -1;
+    }
+    update_cat(_cat,_cat->x + _dx,_cat->y + _dy);
 }

@@ -15,9 +15,9 @@ grid_t *create_grid(const int _grid_w, const int _grid_h, const int _square_widt
                                              (j + 1) * _square_width_size + 1, (i + 1) * _square_height_size + 1);
         }
     }
-    for (size_t i = 1; i < g->height-1; ++i)
+    for (size_t i = 1; i < g->height - 1; ++i)
     {
-        for (size_t j = 1; j < g->width -1; ++j)
+        for (size_t j = 1; j < g->width - 1; ++j)
         {
             bool is_wall = rand() % 8;
             if (!is_wall)
@@ -27,16 +27,16 @@ grid_t *create_grid(const int _grid_w, const int _grid_h, const int _square_widt
                 switch (direction)
                 {
                 case 0:
-                    g->squares[i][j-1]->walls[2] =1;
+                    g->squares[i][j - 1]->walls[2] = 1;
                     break;
                 case 1:
-                    g->squares[i-1][j]->walls[3] =1;
+                    g->squares[i - 1][j]->walls[3] = 1;
                     break;
                 case 2:
-                    g->squares[i][j + 1]->walls[0] =1;
+                    g->squares[i][j + 1]->walls[0] = 1;
                     break;
                 case 3:
-                     g->squares[i+1][j]->walls[1] =1;
+                    g->squares[i + 1][j]->walls[1] = 1;
                     break;
                 default:
                     break;
@@ -87,6 +87,36 @@ void draw_image_at(ALLEGRO_BITMAP *image, grid_t *g, int _x, int _y)
                           g->squares[_y][_x]->x1, g->squares[_y][_x]->y1,
                           image_width * scale_x, image_width * scale_y, 0);
     printf("draw_image3\n");
+}
+
+bool isValid(grid_t *g, int _x1, int _y1, int _x2, int _y2)
+{
+    // if _x2 and _y2 are out Of bound
+    if (_x2 > g->width - 1 || _y2 > g->height - 1 || _x2 < 0 || _y2 < 0)
+    {
+        return false;
+    }
+
+    int dx = _x2 - _x1;
+    int dy = _y2 - _y1;
+    
+    if (dx == 1) // Right
+    {
+        return !g->squares[_x1][_y1]->walls[2];
+    }
+    if (dx == -1) // Left
+    {
+        return !g->squares[_x1][_y1]->walls[0];
+    }
+    if (dy == 1) // Down
+    {
+        return !g->squares[_x1][_y1]->walls[3];
+    }
+    if (dy == -1) // Up
+    {
+        return !g->squares[_x1][_y1]->walls[1];
+    }
+    return false;
 }
 
 // int main()
