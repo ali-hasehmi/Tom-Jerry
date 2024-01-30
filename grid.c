@@ -24,6 +24,7 @@ grid_t *create_grid(const int _grid_w, const int _grid_h, const int _square_widt
             {
                 int direction = rand() % 4;
                 g->squares[i][j]->walls[direction] = 1;
+                printf("h: %d - w: %d - direction: %d\n",i,j,direction);
                 switch (direction)
                 {
                 case 0:
@@ -99,22 +100,22 @@ bool isValid(grid_t *g, int _x1, int _y1, int _x2, int _y2)
 
     int dx = _x2 - _x1;
     int dy = _y2 - _y1;
-    
+
     if (dx == 1) // Right
     {
-        return !g->squares[_x1][_y1]->walls[2];
+        return !g->squares[_y1][_x1]->walls[2];
     }
     if (dx == -1) // Left
     {
-        return !g->squares[_x1][_y1]->walls[0];
+        return !g->squares[_y1][_x1]->walls[0];
     }
     if (dy == 1) // Down
     {
-        return !g->squares[_x1][_y1]->walls[3];
+        return !g->squares[_y1][_x1]->walls[3];
     }
     if (dy == -1) // Up
     {
-        return !g->squares[_x1][_y1]->walls[1];
+        return !g->squares[_y1][_x1]->walls[1];
     }
     return false;
 }
