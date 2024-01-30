@@ -11,6 +11,7 @@ mouse_t *mice[18] = {NULL};
 fish_t *fishes[10] = {NULL};
 trap_t *traps[8] = {NULL};
 bonus_t *bonus[8] = {NULL};
+int turn_num = 15;
 
 /// ALLEGRO STUFF
 ALLEGRO_DISPLAY *display = NULL;
@@ -198,7 +199,8 @@ void updateDisplay()
     }else{
     al_draw_textf(font, al_map_rgb(0, 0, 0),
                   map_grid->height * 80 + 15, 40, 0, "Player2 - defense: %d - attack: %d - point: %d", players[1]->defense, players[1]->attack, players[1]->point);
-    }
+    } 
+    al_draw_textf(font,al_map_rgb(0,0,0),map_grid->height * 80 + 15,65,0,"Number Of Turn: %d",15-turn_num);
     al_flip_display();
 }
 
@@ -310,6 +312,7 @@ void turn_mouse(mouse_t *mouse)
 
 void game()
 {
+    
     updateDisplay();
     bool is_done = false;
     while (!is_done)
@@ -326,5 +329,10 @@ void game()
         {
             turn_mouse(mice[i]);
         }
+        turn_num--;
+        if(turn_num < 0 ){
+            is_done = true;
+        }
     }
+    printf("[[[[[[[[[[[==== GAME FINISHED ====]]]]]]]]\n");
 }
