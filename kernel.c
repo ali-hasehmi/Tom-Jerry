@@ -179,13 +179,26 @@ void updateDisplay()
     }
 
     draw_grid(map_grid);
-    
-    al_draw_textf(font, al_map_rgb(0, 0, 0),
-                  map_grid->height * 80 + 15, 20, 0, "Player1 - defense: %d - attack: %d - point: %d", players[0]->defense, players[0]->attack, players[0]->point);
 
+    if (players[0]->is_turn)
+    {
+
+        al_draw_textf(font, al_map_rgb(210, 0, 0),
+                      map_grid->height * 80 + 15, 20, 0, "Player1 - defense: %d - attack: %d - point: %d", players[0]->defense, players[0]->attack, players[0]->point);
+    }
+    else
+    {
+        al_draw_textf(font, al_map_rgb(0, 0, 0),
+                      map_grid->height * 80 + 15, 20, 0, "Player1 - defense: %d - attack: %d - point: %d", players[0]->defense, players[0]->attack, players[0]->point);
+        
+    }
+    if(players[1]->is_turn){
+        al_draw_textf(font, al_map_rgb(210, 0, 0),
+                  map_grid->height * 80 + 15, 40, 0, "Player2 - defense: %d - attack: %d - point: %d", players[1]->defense, players[1]->attack, players[1]->point);
+    }else{
     al_draw_textf(font, al_map_rgb(0, 0, 0),
                   map_grid->height * 80 + 15, 40, 0, "Player2 - defense: %d - attack: %d - point: %d", players[1]->defense, players[1]->attack, players[1]->point);
-
+    }
     al_flip_display();
 }
 
@@ -197,6 +210,7 @@ void turn_player(cat_t *cat)
         cat->is_limited--;
         return;
     }
+    cat->is_turn = true;
     printf("1\n");
     bool redraw = false;
     bool end_turn = false;
@@ -229,7 +243,8 @@ void turn_player(cat_t *cat)
                 dx = 0;
                 dy = -1;
             }
-            if(e.keyboard.keycode == ALLEGRO_KEY_ENTER){
+            if (e.keyboard.keycode == ALLEGRO_KEY_ENTER)
+            {
                 end_turn = true;
             }
             if (!move_cat(cat, dx, dy))
@@ -249,6 +264,7 @@ void turn_player(cat_t *cat)
         }
     }
     cat->actions = 3;
+    cat->is_turn = false;
 }
 
 void turn_dog(dog_t *dog)

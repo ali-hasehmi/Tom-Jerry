@@ -24,7 +24,7 @@ cat_t *create_cat(cat_type_t _t)
 {
     cat_t *cat = (cat_t *)malloc(sizeof(cat_t));
     cat->type = _t;
-
+    cat->is_turn = false;
     cat->point = 0;
     cat->defense = 5;
     cat->attack = 3;
