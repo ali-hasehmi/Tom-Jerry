@@ -179,7 +179,11 @@ void updateDisplay()
     }
     draw_grid(map_grid);
     al_draw_textf(font, al_map_rgb(0, 0, 0),
-                  map_grid->height * 80 + 10, 10, 0, "Player1 - defense: %d - attack: %d - point: %d", players[0]->defense, players[0]->attack,players[0]->point);
+                  map_grid->height * 80 + 15, 20, 0, "Player1 - defense: %d - attack: %d - point: %d", players[0]->defense, players[0]->attack, players[0]->point);
+
+    al_draw_textf(font, al_map_rgb(0, 0, 0),
+                  map_grid->height * 80 + 15, 40, 0, "Player2 - defense: %d - attack: %d - point: %d", players[1]->defense, players[1]->attack, players[1]->point);
+
     al_flip_display();
 }
 
@@ -193,9 +197,11 @@ void turn_player(cat_t *cat)
     }
     printf("1\n");
     bool redraw = false;
+    bool end_turn = false;
     int dx = 0, dy = 0;
-    while (cat->actions > 0 && !cat->is_limited)
+    while (cat->actions > 0 && !cat->is_limited && !end_turn)
     {
+        dx = dy = 0;
         ALLEGRO_EVENT e;
         al_wait_for_event(queue, &e);
         switch (e.type)
@@ -221,10 +227,14 @@ void turn_player(cat_t *cat)
                 dx = 0;
                 dy = -1;
             }
+            if(e.keyboard.keycode == ALLEGRO_KEY_ENTER){
+                end_turn = true;
+            }
             if (!move_cat(cat, dx, dy))
             {
                 redraw = true;
             }
+
             break;
         default:
             //            fprintf(stderr, "Invalid Key INPUT\n");
