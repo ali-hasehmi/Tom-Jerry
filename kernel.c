@@ -247,6 +247,7 @@ void turn_player(cat_t *cat)
             {
                 end_turn = true;
             }
+            cat->defense--;
             if (!move_cat(cat, dx, dy))
             {
                 redraw = true;
@@ -264,6 +265,7 @@ void turn_player(cat_t *cat)
         }
     }
     cat->actions = 3;
+    cat->defense++;
     cat->is_turn = false;
 }
 
