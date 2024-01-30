@@ -55,10 +55,12 @@ void update_cat(cat_t *cat, int _x, int _y)
     {
 
     case DOG:
+        int result = combatDogs(cat,(dog_t*)character);
         // Combat with dog
         break;
 
     case CAT:
+        combatCats(cat,(cat_t*)character);
         // Combat with another Cat
         break;
 
@@ -75,22 +77,22 @@ void update_cat(cat_t *cat, int _x, int _y)
         // Capture Mouse and Gain Point
         break;
 
-    case BONUS:
-        cat->attack++;
-
-        // Eat Bonus and gain Power(Attack)
-        break;
 
     default:
         break;
     }
     if (c_grid->squares[_y][_x]->is_trap)
     {
+        stayOnTrap(cat);
         // Cat get on the Trap hence
         // It must suffer the one of the consequences :
         // Release the Richest Mice's of the cat
         // Reduce Attack by 2
         // Reduce Energy by 3
+    }
+    if(c_grid->squares[_y][_x]->is_bonus) {
+        cat->attack++;
+        c_grid->squares[_y][_x]->is_bonus = false;
     }
     cat->x = _x;
     cat->y = _y;

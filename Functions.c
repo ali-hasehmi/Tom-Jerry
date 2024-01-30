@@ -59,7 +59,7 @@ int combatDogs(cat_t *cat, dog_t *dog)
     if ((cat->attack * cat->defense) > (dog->defense * dog->attack))
     {
         cat->defense -= (dog->attack * dog->defense / cat->attack);
-        destroy_dog(dog);
+        kill_dog(dog);
         return 1;
     }
     else if ((cat->attack * cat->defense) < (dog->defense * dog->attack))
