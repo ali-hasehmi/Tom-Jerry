@@ -24,7 +24,7 @@ grid_t *create_grid(const int _grid_w, const int _grid_h, const int _square_widt
             {
                 int direction = rand() % 4;
                 g->squares[i][j]->walls[direction] = 1;
-                printf("h: %d - w: %d - direction: %d\n",i,j,direction);
+                printf("h: %d - w: %d - direction: %d\n", i, j, direction);
                 switch (direction)
                 {
                 case 0:
