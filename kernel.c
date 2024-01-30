@@ -8,6 +8,7 @@ cat_t *players[2] = {NULL, NULL};
 dog_t *dogs[4] = {NULL, NULL, NULL, NULL};
 mouse_t *mice[18] = {NULL};
 fish_t *fishes[10] = {NULL};
+trap_t *traps[8] = {NULL};
 
 /// ALLEGRO STUFF
 ALLEGRO_DISPLAY *display = NULL;
@@ -94,6 +95,12 @@ void init_kernel()
     for (int i = 0; i < 10; ++i)
     {
         fishes[i] = create_fish();
+    }
+
+    // Create Trap
+    for (int i = 0; i < 8; ++i)
+    {
+        traps[i] = create_trap();
     }
     printf("phase 14\n");
     al_start_timer(timer);
@@ -197,7 +204,7 @@ void turn_player(cat_t *cat)
             }
             break;
         default:
-//            fprintf(stderr, "Invalid Key INPUT\n");
+            //            fprintf(stderr, "Invalid Key INPUT\n");
             break;
         }
         if (redraw)
@@ -226,17 +233,20 @@ void turn_dog(dog_t *dog)
     dog->actions = dog->speed;
 }
 
-void turn_mouse(mouse_t* mouse) {
-    if(!mouse->is_alive) {
+void turn_mouse(mouse_t *mouse)
+{
+    if (!mouse->is_alive)
+    {
         return;
     }
     mouse_t *cats[2] = {NULL};
-    cats[0] = create_mouse_with_xy(players[0]->x , players[0]->y);
-    cats[1] = create_mouse_with_xy(players[1]->x , players[1]->y);
+    cats[0] = create_mouse_with_xy(players[0]->x, players[0]->y);
+    cats[1] = create_mouse_with_xy(players[1]->x, players[1]->y);
     printf("mouse 1");
-    while(mouse->actions > 0) {
+    while (mouse->actions > 0)
+    {
         Sleep(rand() % 1000 + 100);
-        move_mouse(mouse,cats);
+        move_mouse(mouse, cats);
         updateDisplay();
         mouse->actions--;
     }
@@ -251,13 +261,16 @@ void game()
     bool is_done = false;
     while (!is_done)
     {
-        for(int i = 0 ; i < 2 ; ++i){
+        for (int i = 0; i < 2; ++i)
+        {
             turn_player(players[i]);
         }
-        for(int i = 0 ; i < 4 ; ++i){
+        for (int i = 0; i < 4; ++i)
+        {
             turn_dog(dogs[i]);
         }
-        for(int i = 0 ; i < 18 ; i++) {
+        for (int i = 0; i < 18; i++)
+        {
             turn_mouse(mice[i]);
         }
     }
