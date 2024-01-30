@@ -298,7 +298,8 @@ void turn_mouse(mouse_t *mouse)
     mouse_t *cats[2] = {NULL};
     cats[0] = create_mouse_with_xy(players[0]->x, players[0]->y);
     cats[1] = create_mouse_with_xy(players[1]->x, players[1]->y);
-    printf("mouse 1");
+    mouse->actions = mouse->speed;
+    printf("turn_mouse(mouse_t *): mouse\n");
     while (mouse->actions > 0)
     {
         Sleep(rand() % 100 + 100);
