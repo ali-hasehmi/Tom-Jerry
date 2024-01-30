@@ -67,15 +67,7 @@ void update_cat(cat_t *cat, int _x, int _y)
 
     int result = 2; 
     update_square(c_grid->squares[cat->y][cat->x], NOTHING, (void *)NULL);
-    // switch (state)
-    // {
-    // case ONFISH:
-    //     cat->defense += fish->energy;
-    //     break;
-    // case ONBONUS:
-    //     cat->attack++;
-    //     break;
-    // }
+    printf("Error here");
     void *character = c_grid->squares[_y][_x]->character;
     switch (c_grid->squares[_y][_x]->type)
     {
@@ -86,6 +78,7 @@ void update_cat(cat_t *cat, int _x, int _y)
         break;
 
     case CAT:
+
         result = combatCats(cat, (cat_t *)character);
         // Combat with another Cat
         break;

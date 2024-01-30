@@ -197,7 +197,7 @@ void turn_player(cat_t *cat)
             }
             break;
         default:
-            fprintf(stderr, "Invalid Key INPUT\n");
+//            fprintf(stderr, "Invalid Key INPUT\n");
             break;
         }
         if (redraw)

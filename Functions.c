@@ -10,18 +10,22 @@ void miceAdder(cat_t* cat_one,cat_t* cat_two) {
         cat_one->mouses = 0;
     }
     else {
+
         mouse_t* new_mouses[18];
         int itr = 0;
         for(int i = 0 ; i < 18 ; i++) {
+            printf("loop1\n");
             if( cat_one->mouse[i]) {
                 new_mouses[itr++] = cat_one->mouse[i];
             }
         }
         for(int i = 0 ; i < 18 ; i++) {
+            printf("loop2\n");
             if( cat_two->mouse[i]) {
                 new_mouses[itr++] = cat_two->mouse[i];
             }
         }
+        printf("loops ended\n");
         cat_one->mouses += cat_two->mouses;
         miceAdder(cat_two,NULL);
     }
@@ -30,8 +34,15 @@ void miceAdder(cat_t* cat_one,cat_t* cat_two) {
 
 int combatCats(cat_t *cat_one,cat_t *cat_two)
 {
+    if(cat_one == NULL || cat_two== NULL) {
+        fprintf(stderr,"nullptr");
+        return 1;
+    }
+    printf("%d %d %d %d",cat_two->attack,cat_two->defense,cat_one->attack,cat_one->defense);
+    printf("in combat baby");
     if ((cat_two->attack * cat_two->defense) > (cat_one->defense * cat_one->attack))
     {
+        printf("if one");
         cat_two->defense -= (cat_one->attack * cat_one->defense / cat_two->attack);
         cat_one->attack = 1;
         cat_one->defense = 0;

@@ -45,7 +45,7 @@ void update_dog(dog_t *dog, int _x, int _y)
     }if (d_grid->squares[_y][_x]->type == CAT) {
         result = combatDogs((cat_t*)d_grid->squares[_y][_x]->character,dog);
         if(result) return;
-
+        //else : Handled by update cat and combatDogs functions.
     }
     if (dog->x == _x && dog->y == _y)
     {
