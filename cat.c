@@ -20,16 +20,28 @@ void init_cat(grid_t *g)
         fprintf(stderr, "init_cat(grid_t *): Couldn't Load cat-2.png\n");
     }
 }
-cat_t *create_cat()
+cat_t *create_cat(cat_type_t _t)
 {
     cat_t *cat = (cat_t *)malloc(sizeof(cat_t));
+    cat->type = _t;
+
     cat->point = 0;
     cat->defense = 5;
     cat->attack = 3;
     cat->actions = 3;
     cat->mouses = 0;
     cat->is_limited = 0;
-    cat->image = cat_image1;
+    switch (_t) {
+        case CAT_ONE:
+            cat->image = cat_image1;
+            break;
+        case CAT_TWO:
+            //Upload second image for this cat.
+            break;
+        default:
+            break;
+    }
+    //cat->image = cat_image1;
     for (int i = 0; i < 18; i++)
     {
         cat->mouse[i] = NULL;

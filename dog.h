@@ -9,10 +9,10 @@
 
 typedef enum dogtype
 {
-    BULLDOG,
-    PITBULL,
-    SHEPHERD,
-    BULLDOGJR
+    BULLDOG = 3,
+    PITBULL = 2,
+    SHEPHERD = 1,
+    BULLDOGJR = 0
 } dogtype_t;
 
 typedef struct dog

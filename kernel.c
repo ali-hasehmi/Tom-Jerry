@@ -62,7 +62,7 @@ void init_kernel()
     printf("phase 8\n");
     for (int i = 0; i < 2; ++i)
     {
-        players[i] = create_cat();
+        players[i] = create_cat(i);
     }
 
     printf("phase 9\n");
