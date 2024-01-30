@@ -7,7 +7,11 @@
 #include "mouse.h"
 #include "Characters.h"
 
-typedef enum status { ONFISH , ONBONUS }status_t;
+typedef enum status
+{
+    ONFISH,
+    ONBONUS
+} status_t;
 
 typedef struct cat
 {
@@ -21,8 +25,9 @@ typedef struct cat
     ALLEGRO_BITMAP *image;
 } cat_t;
 
-cat_t* create_cat();
-void update_cat(cat_t* cat,state_t state,fish_t* fish);
-int destroy_cat();
+void init_cat(grid_t *g);
+cat_t *create_cat();
+void update_cat(cat_t *cat, int _x, int _y);
+int destroy_cat(cat_t *cat);
 
-#endif //TOM_JERRY_CAT_H
+#endif // TOM_JERRY_CAT_H

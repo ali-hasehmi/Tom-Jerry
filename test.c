@@ -4,6 +4,7 @@
 #include "fish.h"
 #include "trap.h"
 #include "mouse.h"
+#include "cat.h"
 
 int main()
 {
@@ -23,6 +24,7 @@ int main()
     init_fish(g);
     init_trap(g);
     init_mouse(g);
+    init_cat(g);
 
     dog_t *b = create_dog(BULLDOG);
     dog_t *p = create_dog(PITBULL);
@@ -34,7 +36,7 @@ int main()
     mouse_t *m1 = create_mouse(ONE);
     mouse_t *m2 = create_mouse(TWO);
     mouse_t *m3 = create_mouse(THREE);
-
+    cat_t *cat = create_cat();
     al_start_timer(timer);
     printf("here\n");
     int i = 0, j = 0;
@@ -55,25 +57,26 @@ int main()
             al_draw_line(0, 900, 1200, 900, al_map_rgb(147, 154, 70), 25);
             al_draw_line(1200, 1, 1200, 900, al_map_rgb(147, 154, 70), 25);
             // update_square(g->squares[4][4],TRAP,NULL);
-            printf("1\n");
-            update_dog(b, ++i, ++j);
-            printf("2\n");
-            update_dog(p, (i + 2) / 3, (j + 1) / 2);
-            printf("3\n");
-            update_dog(s, (i + 1) / 4, (j + 1) / 9);
-            printf("4\n");
-            update_dog(br, (i + 6) / 8, (j + 1) / 5);
-            printf("5\n");
-            update_fish(f, true);
-            printf("6\n");
-            update_fish(f2, true);
-            printf("7\n");
-            update_trap(trap, rand() % 3);
-            printf("8\n");
-            int x = rand() % 1 + 1;
-            update_mouse(m1, m1->x + x, m1->y + x - 1);
-            update_mouse(m2, m2->x + x-1, m2->y + x);
-            update_mouse(m3, m3->x + x, m3->y + x - 1);
+            // printf("1\n");
+            // update_dog(b, ++i, ++j);
+            // printf("2\n");
+            // update_dog(p, (i + 2) / 3, (j + 1) / 2);
+            // printf("3\n");
+            // update_dog(s, (i + 1) / 4, (j + 1) / 9);
+            // printf("4\n");
+            // update_dog(br, (i + 6) / 8, (j + 1) / 5);
+            // printf("5\n");
+            // update_fish(f, true);
+            // printf("6\n");
+            // update_fish(f2, true);
+            // printf("7\n");
+            // update_trap(trap, rand() % 3);
+            // printf("8\n");
+            // int x = rand() % 1 + 1;
+            // update_mouse(m1, m1->x + x, m1->y + x - 1);
+            // update_mouse(m2, m2->x + x - 1, m2->y + x);
+            // update_mouse(m3, m3->x + x, m3->y + x - 1);
+            update_cat(cat,(++i + 6) % 8,(++j + 1) % 5);
             draw_grid(g);
             printf("9\n");
             al_flip_display();
