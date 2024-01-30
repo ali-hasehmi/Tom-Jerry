@@ -103,3 +103,35 @@ void kill_dog(dog_t *_dog)
     _dog->is_alive = false;
     update_square(d_grid->squares[_dog->y][_dog->x], NOTHING, NULL);
 }
+
+int move_dog(dog_t *_dog)
+{
+    if (!_dog->is_alive)
+    {
+        return -1;
+    }
+    // bool best_move = false;
+    int dir[4][2] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+    int new_x, new_y;
+    // for (int i = 0; i < 4; ++i)
+    // {
+    //     int dx = dir[i][0];
+    //     int dy = dir[i][1];
+    //     new_x = _dog->x + dx;
+    //     new_y = _dog->y + dy;
+    //     if (d_grid->squares[new_y][new_x]->type == CAT)
+    //     {
+    //         best_move = true;
+    //         break;
+    //     }
+    // }
+
+    do
+    {
+        int rand_num = rand() % 4;
+        new_x = _dog->x + dir[rand_num][0];
+        new_y = _dog->y + dir[rand_num][1];
+    } while (!isValid(d_grid, _dog->x, _dog->y, new_x, new_y));
+    
+    update_dog(_dog,new_x,new_y);
+}

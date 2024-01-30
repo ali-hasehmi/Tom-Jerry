@@ -49,7 +49,7 @@ void update_cat(cat_t *cat, int _x, int _y)
     //     cat->attack++;
     //     break;
     // }
-        void *character = c_grid->squares[_y][_x]->character;
+    void *character = c_grid->squares[_y][_x]->character;
     switch (c_grid->squares[_y][_x]->type)
     {
 
