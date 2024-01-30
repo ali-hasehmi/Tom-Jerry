@@ -101,23 +101,23 @@ bool isValid(grid_t *g, int _x1, int _y1, int _x2, int _y2)
     int dx = _x2 - _x1;
     int dy = _y2 - _y1;
 
-    if (dx == 1) // Right
+    if (dx == 1 && dy == 0) // Right
     {
         return !g->squares[_y1][_x1]->walls[2];
     }
-    if (dx == -1) // Left
+    if (dx == -1 && dy == 0) // Left
     {
         return !g->squares[_y1][_x1]->walls[0];
     }
-    if (dy == 1) // Down
+    if (dy == 1 && dx == 0) // Down
     {
         return !g->squares[_y1][_x1]->walls[3];
     }
-    if (dy == -1) // Up
+    if (dy == -1 && dx == 0) // Up
     {
         return !g->squares[_y1][_x1]->walls[1];
     }
-    return false;
+    return true;
 }
 
 // int main()
