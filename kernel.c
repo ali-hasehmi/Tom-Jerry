@@ -13,6 +13,7 @@ trap_t *traps[8] = {NULL};
 bonus_t *bonus[8] = {NULL};
 int turn_num = 15;
 
+
 /// ALLEGRO STUFF
 ALLEGRO_DISPLAY *display = NULL;
 ALLEGRO_EVENT_QUEUE *queue = NULL;
@@ -310,6 +311,14 @@ void turn_mouse(mouse_t *mouse)
     free(cats[1]);
 }
 
+int fish_counter() {
+    int cnt = 0;
+    for(int i = 0 ; i < 10 ; i++)
+        if(fishes[i]->is_alive)
+            cnt++;
+    return cnt;
+}
+
 void game()
 {
     
@@ -329,6 +338,9 @@ void game()
         {
             turn_mouse(mice[i]);
         }
+        if(fish_counter() < 2)
+            for(int i = 0 ; i < 10;i++)
+                fishes[i]->is_alive = true;
         turn_num--;
         if(turn_num < 0 ){
             is_done = true;

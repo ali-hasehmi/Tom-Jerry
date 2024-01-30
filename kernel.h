@@ -3,6 +3,7 @@
 #include "Characters.h"
 
 
+int  fish_counter();
 void init_kernel();
 void cleanup_kernel();
 void updateDisplay();
