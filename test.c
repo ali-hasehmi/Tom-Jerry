@@ -106,9 +106,9 @@ int main()
             // printf("4\n");
             // update_dog(br, (i + 6) / 8, (j + 1) / 5);
             // printf("5\n");
-            // update_fish(f, true);
+            update_fish(f);
             // printf("6\n");
-            // update_fish(f2, true);
+            update_fish(f2);
             // printf("7\n");
             // update_trap(trap, rand() % 3);
             // printf("8\n");

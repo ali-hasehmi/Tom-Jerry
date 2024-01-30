@@ -49,7 +49,44 @@ void update_cat(cat_t *cat, int _x, int _y)
     //     cat->attack++;
     //     break;
     // }
+        void *character = c_grid->squares[_y][_x]->character;
+    switch (c_grid->squares[_y][_x]->type)
+    {
 
+    case DOG:
+        // Combat with dog
+        break;
+
+    case CAT:
+        // Combat with another Cat
+        break;
+
+    case FISH:
+        // eat fish and gain Energy
+        cat->defense += ((fish_t *)character)->energy;
+        printf("eating fish\n");
+        eat_fish(((fish_t *)character));
+        break;
+
+    case MOUSE:
+        // Capture Mouse and Gain Point
+        break;
+
+    case BONUS:
+        // Eat Bonus and gain Power(Attack)
+        break;
+
+    default:
+        break;
+    }
+    if (c_grid->squares[_y][_x]->is_trap)
+    {
+        // Cat get on the Trap hence
+        // It must suffer the one of the consequences :
+        // Release the Richest Mice's of the cat
+        // Reduce Attack by 2
+        // Reduce Energy by 3
+    }
     cat->x = _x;
     cat->y = _y;
     update_square(c_grid->squares[cat->y][cat->x], CAT, (void *)CAT);
@@ -67,8 +104,9 @@ int move_cat(cat_t *_cat, int _dx, int _dy)
     {
         return 1;
     }
-    if(_cat->actions <0){
+    if (_cat->actions < 0)
+    {
         return -1;
     }
-    update_cat(_cat,_cat->x + _dx,_cat->y + _dy);
+    update_cat(_cat, _cat->x + _dx, _cat->y + _dy);
 }

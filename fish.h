@@ -19,7 +19,9 @@ void init_fish(grid_t *g);
 
 fish_t* create_fish();
 
-void update_fish(fish_t *f,bool _is_alive);
+void update_fish(fish_t *f);
+
+void eat_fish(fish_t* _f);
 
 void destroy_fish(fish_t *f);
 
