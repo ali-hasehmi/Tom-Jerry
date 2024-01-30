@@ -40,7 +40,7 @@ void init_kernel()
 
     // Create Display
     printf("phase 5\n");
-    display = al_create_display(1500, 900);
+    display = al_create_display(1800, 900);
     // Crate Font
     font = al_create_builtin_font();
     // Register Event Sources
@@ -178,7 +178,8 @@ void updateDisplay()
         update_bonus(bonus[i]);
     }
     draw_grid(map_grid);
-    al_draw_textf(font, al_map_rgb(0, 0, 0), map_grid->height * 80 + 30, 10, 0, "Player1 - defense: %d - attack: %d", players[0]->defense, players[0]->defense);
+    al_draw_textf(font, al_map_rgb(0, 0, 0),
+                  map_grid->height * 80 + 10, 10, 0, "Player1 - defense: %d - attack: %d - point: %d", players[0]->defense, players[0]->defense,players[0]->point);
     al_flip_display();
 }
 
