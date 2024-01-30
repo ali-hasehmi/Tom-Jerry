@@ -25,6 +25,7 @@ trap_t *create_trap()
         trap->y = rand() % 15;
     } while (!set_square_as_trap(t_grid->squares[trap->y][trap->x]));
     t_grid->squares[trap->y][trap->x]->trap = trap;
+    t_grid->squares[trap->y][trap->x]->is_trap = true;
     return trap;
 }
 

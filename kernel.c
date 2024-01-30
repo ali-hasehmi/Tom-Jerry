@@ -179,7 +179,7 @@ void updateDisplay()
     }
     draw_grid(map_grid);
     al_draw_textf(font, al_map_rgb(0, 0, 0),
-                  map_grid->height * 80 + 10, 10, 0, "Player1 - defense: %d - attack: %d - point: %d", players[0]->defense, players[0]->defense,players[0]->point);
+                  map_grid->height * 80 + 10, 10, 0, "Player1 - defense: %d - attack: %d - point: %d", players[0]->defense, players[0]->attack,players[0]->point);
     al_flip_display();
 }
 
