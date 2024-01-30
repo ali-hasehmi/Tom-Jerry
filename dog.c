@@ -37,6 +37,10 @@ void init_dog(grid_t *g)
 
 void update_dog(dog_t *dog, int _x, int _y)
 {
+    if (!dog->is_alive)
+    {
+        return;
+    }
     update_square(d_grid->squares[dog->y][dog->x], NOTHING, NULL);
     dog->x = _x;
     dog->y = _y;
@@ -78,8 +82,11 @@ dog_t *create_dog(dogtype_t type)
         break;
     }
     dog->is_alive = true;
-    dog->x = rand() % 15;
-    dog->y = rand() % 15;
+    do
+    {
+        dog->x = rand() % 15;
+        dog->y = rand() % 15;
+    } while (d_grid->squares[dog->y][dog->x]->type != NOTHING);
     draw_image_at(dog->image, d_grid, dog->x, dog->y);
     update_square(d_grid->squares[dog->y][dog->x], DOG, (void *)dog);
     return dog;
@@ -89,4 +96,10 @@ int destroy_dog(dog_t *dog)
 {
     al_destroy_bitmap(dog->image);
     free(dog);
+}
+
+void kill_dog(dog_t *_dog)
+{
+    _dog->is_alive = false;
+    update_square(d_grid->squares[_dog->y][_dog->x], NOTHING, NULL);
 }

@@ -31,6 +31,8 @@ void update_dog(dog_t *dog, int _x, int _y);
 
 int destroy_dog(dog_t *dog);
 
-int move_dog(dog_t* _dog);
+void kill_dog(dog_t *_dog);
+
+int move_dog(dog_t *_dog);
 
 #endif // TOM_JERRY_DOG_H
