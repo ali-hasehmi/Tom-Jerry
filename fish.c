@@ -8,7 +8,8 @@ void init_fish(grid_t *g)
 {
     f_grid = g;
     fish_image = al_load_bitmap("./asset/fish/fish.png");
-    if(fish_image == NULL){
+    if (fish_image == NULL)
+    {
         fprintf(stderr, "init_fish(grid_t *): Can't load fish image\n");
     }
 }
@@ -19,8 +20,11 @@ fish_t *create_fish()
     fish->image = fish_image;
     fish->is_alive = true;
     fish->energy = rand() % 3 + 2;
-    fish->x = rand() % 15;
-    fish->y = rand() % 15;
+    do
+    {
+        fish->x = rand() % 15;
+        fish->y = rand() % 15;
+    } while (f_grid->squares[fish->y][fish->x]->type != NOTHING);
     draw_image_at(fish_image, f_grid, fish->x, fish->y);
     update_square(f_grid->squares[fish->y][fish->x], FISH, fish);
     return fish;
@@ -28,17 +32,17 @@ fish_t *create_fish()
 
 void update_fish(fish_t *f)
 {
-    //f->is_alive = _is_alive;
+    // f->is_alive = _is_alive;
     if (!f->is_alive)
     {
-        //update_square(f_grid->squares[f->y][f->x], NOTHING, NULL);
+        // update_square(f_grid->squares[f->y][f->x], NOTHING, NULL);
         return;
     }
     draw_image_at(f->image, f_grid, f->x, f->y);
     update_square(f_grid->squares[f->y][f->x], FISH, (void *)f);
 }
 
-void eat_fish(fish_t* _f)
+void eat_fish(fish_t *_f)
 {
     _f->is_alive = false;
     update_square(f_grid->squares[_f->y][_f->x], NOTHING, NULL);
