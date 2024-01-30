@@ -32,11 +32,10 @@ void init_kernel()
     al_set_new_display_option(ALLEGRO_SAMPLES, 8, ALLEGRO_SUGGEST);
     al_set_new_bitmap_flags(ALLEGRO_MIN_LINEAR | ALLEGRO_MAG_LINEAR);
 
-
     // Create Display
     printf("phase 5\n");
     display = al_create_display(1200, 900);
-    
+
     // Register Event Sources
     printf("phase 4.1\n");
     al_register_event_source(queue, al_get_display_event_source(display));
@@ -205,6 +204,7 @@ void turn_player(cat_t *cat)
             redraw = false;
         }
     }
+    cat->actions = 3;
 }
 
 void game()

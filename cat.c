@@ -26,6 +26,7 @@ cat_t *create_cat()
     cat->point = 0;
     cat->defense = 5;
     cat->attack = 2;
+    cat->actions = 3;
     cat->mouses = 0;
     cat->is_limited = 0;
     cat->image = cat_image1;
