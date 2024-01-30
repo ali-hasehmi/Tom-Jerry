@@ -83,6 +83,10 @@ mouse_t *create_mouse(mice_t type)
 
 void update_mouse(mouse_t *mouse, int _x, int _y)
 {
+    if (!mouse->is_alive)
+    {
+        return;
+    }
     if (mouse->x == _x && mouse->y == _y)
     {
         update_square(m_grid->squares[mouse->y][mouse->x], MOUSE, (void *)mouse);

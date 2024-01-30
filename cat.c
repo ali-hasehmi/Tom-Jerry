@@ -25,7 +25,7 @@ cat_t *create_cat()
     cat_t *cat = (cat_t *)malloc(sizeof(cat_t));
     cat->point = 0;
     cat->defense = 5;
-    cat->attack = 2;
+    cat->attack = 3;
     cat->actions = 3;
     cat->mouses = 0;
     cat->is_limited = 0;
@@ -42,6 +42,7 @@ cat_t *create_cat()
 }
 void update_cat(cat_t *cat, int _x, int _y)
 {
+    
     if (cat->x == _x && cat->y == _y)
     {
         update_square(c_grid->squares[cat->y][cat->x], CAT, (void *)CAT);
@@ -49,7 +50,7 @@ void update_cat(cat_t *cat, int _x, int _y)
         return;
     }
 
-    int result = 2;
+    int result = 2; 
     update_square(c_grid->squares[cat->y][cat->x], NOTHING, (void *)NULL);
     // switch (state)
     // {
@@ -82,6 +83,7 @@ void update_cat(cat_t *cat, int _x, int _y)
         break;
 
     case MOUSE:
+        printf("MOUSE in updated cat\n");
         stayOnMouse(cat, (mouse_t *)character);
         eat_mouse((mouse_t *)character);
         // Capture Mouse and Gain Point
