@@ -38,7 +38,7 @@ void init_kernel()
 
     // Create Display
     printf("phase 5\n");
-    display = al_create_display(1200, 900);
+    display = al_create_display(1500, 900);
 
     // Register Event Sources
     printf("phase 4.1\n");
