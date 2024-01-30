@@ -7,12 +7,12 @@
 
 #include <stdbool.h>
 #include <stdlib.h>
+#include "grid.h"
 #include "fish.h"
 #include "cat.h"
 #include "dog.h"
 #include "square.h"
-#include "trap.h"
 #include "mouse.h"
-#include "grid.h"
+#include "trap.h"
 
 #endif // TOM_JERRY_CHARACTERS_H

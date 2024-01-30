@@ -1,5 +1,5 @@
-#include "Characters.h"
 #include "trap.h"
+#include "Characters.h"
 
 ALLEGRO_BITMAP *trap_image = NULL;
 grid_t *t_grid = NULL;
@@ -24,20 +24,22 @@ trap_t *create_trap()
         trap->x = rand() % 15;
         trap->y = rand() % 15;
     } while (!set_square_as_trap(t_grid->squares[trap->y][trap->x]));
+    t_grid->squares[trap->y][trap->x]->trap = trap;
     return trap;
 }
 
-void update_trap(trap_t *t, bool _is_reveal)
+void update_trap(trap_t *t)
 {
-    t->is_reveal = _is_reveal;
+    //t->is_reveal = _is_reveal;
     if (!t->is_reveal)
     {
         return;
     }
-    printf("update_trap:}N");
+    printf("update_trap\n");
     printf("%d %d %p\n",t->x,t->y,t->image);
     draw_image_at(t->image, t_grid, t->x, t->y);
 }
+
 void destroy_trap(trap_t *t)
 {
     free(t);

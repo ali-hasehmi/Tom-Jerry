@@ -1,5 +1,6 @@
 #include "kernel.h"
 #include "cat.h"
+#include "trap.h"
 
 #include <windows.h>
 
@@ -58,7 +59,7 @@ void init_kernel()
     init_fish(map_grid);
     init_mouse(map_grid);
     init_trap(map_grid);
-
+    
     // Create Players
     printf("phase 8\n");
     for (int i = 0; i < 2; ++i)
@@ -155,6 +156,9 @@ void updateDisplay()
     for (int i = 0; i < 10; ++i)
     {
         update_fish(fishes[i]);
+    }
+    for(int i = 0 ; i < 8 ; ++i){
+        update_trap(traps[i]);
     }
     draw_grid(map_grid);
     al_flip_display();

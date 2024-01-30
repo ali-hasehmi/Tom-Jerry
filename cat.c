@@ -102,12 +102,13 @@ void update_cat(cat_t *cat, int _x, int _y)
     }
     if (c_grid->squares[_y][_x]->is_trap)
     {
-        stayOnTrap(cat);
         // Cat get on the Trap hence
         // It must suffer the one of the consequences :
         // Release the Richest Mice's of the cat
         // Reduce Attack by 2
         // Reduce Energy by 3
+        stayOnTrap(cat);
+        c_grid->squares[_y][_x]->trap->is_reveal = true;
     }
     if (c_grid->squares[_y][_x]->is_bonus)
     {

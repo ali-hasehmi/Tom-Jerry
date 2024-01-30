@@ -16,6 +16,6 @@ typedef struct trap
 
 void init_trap(grid_t *g);
 trap_t *create_trap();
-void update_trap(trap_t *t,bool _is_reveal);
+void update_trap(trap_t *t);
 void destroy_trap(trap_t *t);
 #endif // TOM_JERRY_TRAP_H

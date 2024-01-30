@@ -16,6 +16,7 @@ square_t *create_square(int x1, int y1, int x2, int y2)
     s->character = NULL;
     s->is_trap = false;
     s->type = NOTHING;
+    s->trap = NULL;
     return s;
 }
 
@@ -87,11 +88,11 @@ void update_square(square_t *s, state_t _new_type, void *_new_character)
         s->b = 41;
         break;
 
-    // case BONUS:
-    //     s->r = 244;
-    //     s->g = 151;
-    //     s->b = 20;
-    //     break;
+        // case BONUS:
+        //     s->r = 244;
+        //     s->g = 151;
+        //     s->b = 20;
+        //     break;
 
     default:
         fprintf(stderr, "update_square():Not valid state");

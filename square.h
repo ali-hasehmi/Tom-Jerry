@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include "Characters.h"
 
 typedef enum state
 {
@@ -24,6 +25,7 @@ typedef struct square
     int x2, y2;
     int r, g, b;
     void *character;
+    trap_t *trap;
     bool is_trap;
     bool is_bonus;
     bool walls[4]; // 0 : left, 1 : up, 2 : right ,3 : down
